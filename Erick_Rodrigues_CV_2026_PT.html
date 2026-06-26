@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Erick Rodrigues — CV 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet"/>
+<style>
+
+/* ── RESET ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── DESIGN TOKENS ──────────────────────────────── */
+:root {
+  --ink:     #0D1B2A;
+  --navy:    #1B3A5C;
+  --blue:    #2563A8;
+  --body:    #2E3A4E;
+  --muted:   #52677E;
+  --subtle:  #7A90A8;
+  --divider: #CDD8E3;
+  --tag-bg:  #EDF4FF;
+  --tag-bd:  #B8D4F0;
+  --tag-tx:  #1B4F8A;
+  --side-bg: #F6F9FC;
+  --sum-bg:  #F0F5FB;
+  --page-bg: #DDE3EB;
+  --white:   #FFFFFF;
+  --px: 11mm;
+}
+
+/* ── BODY ───────────────────────────────────────── */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--page-bg);
+  color: var(--body);
+  font-size: 8pt;
+  line-height: 1.4;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ── PAGE CONTAINER ─────────────────────────────── */
+.page {
+  width: 210mm;
+  height: 296mm;
+  overflow: hidden;
+  background: var(--white);
+  margin: 24px auto;
+  box-shadow: 0 6px 40px rgba(0,0,0,.18), 0 2px 8px rgba(0,0,0,.10);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* ── HEADER ─────────────────────────────────────── */
+.hd {
+  text-align: center;
+  padding: 7mm var(--px) 0;
+  flex-shrink: 0;
+}
+
+.hd h1 {
+  font-size: 20pt;
+  font-weight: 800;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.hd .subtitle {
+  font-size: 9pt;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--blue);
+  margin: 3px 0 4px;
+  letter-spacing: .3px;
+}
+
+.hd .contact {
+  font-size: 7.5pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+}
+
+.hd .contact .sep { margin: 0 5px; color: var(--divider); }
+
+.hd-rule {
+  margin: 5px var(--px) 0;
+  border: none;
+  border-top: 2px solid var(--navy);
+  flex-shrink: 0;
+}
+
+/* ── PAGE 2 COMPACT HEADER ──────────────────────── */
+.hd-p2 {
+  padding: 5mm var(--px) 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.hd-p2 h2 {
+  font-size: 12pt;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.hd-p2 .sub2 {
+  font-size: 8pt;
+  font-weight: 600;
+  color: var(--blue);
+  font-style: italic;
+}
+
+.hd-p2 .con2 {
+  font-size: 7pt;
+  color: var(--muted);
+}
+
+.hd-rule2 {
+  margin: 4px var(--px) 0;
+  border: none;
+  border-top: 1.5px solid var(--navy);
+  flex-shrink: 0;
+}
+
+/* ── EXECUTIVE SUMMARY ──────────────────────────── */
+.sum-wrap {
+  padding: 4px var(--px);
+  flex-shrink: 0;
+}
+
+.summary {
+  padding: 6px 11px 6px 13px;
+  background: var(--sum-bg);
+  border-left: 3px solid var(--navy);
+  font-size: 7.8pt;
+  color: var(--muted);
+  line-height: 1.58;
+}
+
+.summary strong { color: var(--ink); font-weight: 700; }
+.summary em     { color: var(--blue); font-style: normal; font-weight: 600; }
+
+/* ── BODY GRID ──────────────────────────────────── */
+.body {
+  display: grid;
+  grid-template-columns: 1.58fr 1fr;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.col-main {
+  padding: 7px var(--px) 0 9mm;
+  border-right: 1px solid var(--divider);
+  overflow: hidden;
+}
+
+.col-side {
+  background: var(--side-bg);
+  padding: 7px 9mm 0 9mm;
+  overflow: hidden;
+}
+
+/* ── FOOTER ─────────────────────────────────────── */
+.footer {
+  padding: 4px var(--px) 4mm;
+  border-top: 1px solid var(--divider);
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.footer span {
+  font-size: 7pt;
+  color: var(--subtle);
+}
+
+/* ── SECTION ────────────────────────────────────── */
+.sec { margin-bottom: 6px; }
+.sec:last-child { margin-bottom: 0; }
+
+.sec-title {
+  font-size: 6.8pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: var(--navy);
+  padding-bottom: 2.5px;
+  border-bottom: 1.5px solid var(--navy);
+  margin-bottom: 5px;
+}
+
+/* ── EXPERIENCE ENTRY ───────────────────────────── */
+.entry {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #E5EDF5;
+}
+.entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.e-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 1px;
+}
+
+.e-role { font-size: 8.4pt; font-weight: 700; color: var(--ink); }
+.e-org  { font-size: 8.2pt; font-style: italic; font-weight: 600; color: var(--blue); }
+
+.e-date {
+  font-size: 6.8pt;
+  font-weight: 600;
+  color: var(--subtle);
+  background: #EBF3FF;
+  border: 1px solid var(--tag-bd);
+  border-radius: 3px;
+  padding: 1px 5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.e-meta {
+  font-size: 7.2pt;
+  color: var(--subtle);
+  font-style: italic;
+  margin-bottom: 2px;
+}
+
+ul.bl { list-style: none; padding: 0; }
+ul.bl li {
+  font-size: 7.7pt;
+  color: var(--body);
+  padding-left: 10px;
+  position: relative;
+  margin-bottom: 1.5px;
+  line-height: 1.46;
+}
+ul.bl li::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 1px; top: 7px;
+  width: 5px; height: 1.2px;
+  background: var(--navy);
+}
+ul.bl li strong { color: var(--ink); font-weight: 700; }
+
+/* ── PROJECTS ───────────────────────────────────── */
+.proj {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #E5EDF5;
+}
+.proj:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.p-head { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
+
+.p-name { font-size: 8.2pt; font-weight: 700; color: var(--ink); }
+
+.p-badge {
+  font-size: 6.2pt;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--navy);
+  padding: 1px 5px;
+  border-radius: 10px;
+  letter-spacing: .3px;
+  white-space: nowrap;
+}
+
+.p-hook {
+  font-size: 7.6pt;
+  font-weight: 600;
+  color: var(--blue);
+  font-style: italic;
+  margin-bottom: 2px;
+  line-height: 1.32;
+}
+
+.p-desc {
+  font-size: 7.4pt;
+  color: var(--muted);
+  margin-bottom: 3px;
+  line-height: 1.46;
+}
+
+/* ── TAGS ───────────────────────────────────────── */
+.tags { display: flex; flex-wrap: wrap; gap: 2px 3px; }
+.tag {
+  background: var(--tag-bg);
+  border: 1px solid var(--tag-bd);
+  color: var(--tag-tx);
+  font-size: 6.2pt;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+  letter-spacing: .2px;
+}
+
+/* ── SKILL BLOCKS ───────────────────────────────── */
+.sk { margin-bottom: 5px; }
+.sk:last-child { margin-bottom: 0; }
+.sk-cat { font-size: 7.4pt; font-weight: 700; color: var(--ink); margin-bottom: 1px; }
+.sk-items { font-size: 7.1pt; color: var(--muted); line-height: 1.46; }
+
+/* ── BADGE CLOUD ────────────────────────────────── */
+.badges { display: flex; flex-wrap: wrap; gap: 2px 3px; }
+.badge {
+  background: var(--white);
+  border: 1.5px solid #BDD5F0;
+  color: var(--navy);
+  font-size: 6.2pt;
+  font-weight: 700;
+  padding: 2px 5.5px;
+  border-radius: 3px;
+  white-space: nowrap;
+  letter-spacing: .3px;
+  box-shadow: 0 1px 2px rgba(27,58,92,.07);
+}
+
+/* ── EDUCATION ──────────────────────────────────── */
+.edu-card {
+  background: var(--white);
+  border: 1px solid var(--divider);
+  border-radius: 4px;
+  padding: 5px 7px;
+  box-shadow: 0 1px 4px rgba(27,58,92,.06);
+}
+.edu-deg  { font-size: 7.8pt; font-weight: 700; color: var(--ink); line-height: 1.3; }
+.edu-inst { font-size: 7.2pt; font-weight: 600; color: var(--blue); font-style: italic; margin-top: 1px; }
+.edu-meta { font-size: 6.8pt; color: var(--subtle); margin-top: 1px; }
+.edu-note { font-size: 6.8pt; color: var(--muted); margin-top: 2px; font-style: italic; }
+
+/* ── LANGUAGES ──────────────────────────────────── */
+.lang {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3px;
+}
+.lang-name  { font-size: 7.8pt; font-weight: 700; color: var(--ink); }
+.lang-level {
+  font-size: 6.4pt; font-weight: 700; color: var(--white);
+  background: var(--navy); padding: 1.5px 7px; border-radius: 10px; letter-spacing: .3px;
+}
+
+/* ── ADDITIONAL ─────────────────────────────────── */
+ul.add { list-style: none; padding: 0; }
+ul.add li {
+  font-size: 7.2pt; color: var(--muted);
+  padding-left: 10px; position: relative;
+  margin-bottom: 2px; line-height: 1.42;
+}
+ul.add li::before {
+  content: '→';
+  position: absolute; left: 0;
+  color: var(--blue); font-size: 7pt; font-weight: 700;
+}
+
+/* ── PRINT ──────────────────────────────────────── */
+@media print {
+  @page { size: A4; margin: 0; }
+  body  { background: #fff; margin: 0; }
+  .page {
+    width: 210mm;
+    height: 296mm;
+    margin: 0;
+    box-shadow: none;
+    page-break-after: always;
+    break-after: page;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ PÁGINA 1 ═══════════════════════════ -->
+<div class="page">
+
+  <!-- CABEÇALHO -->
+  <div class="hd">
+    <h1>Erick Rodrigues</h1>
+    <div class="subtitle">Desenvolvedor de Software &amp; Empreendedor</div>
+    <div class="contact">
+      <span>Luanda, Angola</span>
+      <span class="sep">|</span>
+      <span>+244 944 345 250</span>
+      <span class="sep">|</span>
+      <span>erickrodrigues781@gmail.com</span>
+      <span class="sep">|</span>
+      <span>Angolano</span>
+    </div>
+  </div>
+  <hr class="hd-rule"/>
+
+  <!-- SÍNTESE EXECUTIVA -->
+  <div class="sum-wrap">
+    <div class="summary">
+      <strong>Síntese Executiva —</strong>
+      Tenho 23 anos. Lidero o design de produto e o desenvolvimento full-stack de ponta a ponta. Fundei a Avenix, lançou a LitCal (app de IA) na App Store e implementou ecossistemas digitais robustos para empresas clientes.
+      Especialista em traduzir problemas operacionais complexos em interfaces intuitivas, coordenando fluxos com parceiros estratégicos e clientes para entregar produtos rápidos e escaláveis.
+      Fluente em <strong>Inglês</strong> e <strong>Português</strong>.
+      Disponível para recolocação internacional e aberto a oportunidades globais em regime remoto.
+    </div>
+  </div>
+
+  <!-- CORPO -->
+  <div class="body">
+    <!-- COLUNA ESQUERDA -->
+    <div class="col-main">
+      <div class="sec">
+        <div class="sec-title">Experiência Profissional</div>
+
+        <!-- AVENIX -->
+        <div class="entry">
+          <div class="e-head">
+            <div>
+              <div class="e-role">Fundador &amp; Diretor-Geral</div>
+              <div class="e-org">AVENIX</div>
+            </div>
+            <div class="e-date">Mar 2025 – Presente</div>
+          </div>
+          <div class="e-meta">Luanda, Angola &nbsp;·&nbsp; Desenvolvimento de Software &amp; Automação de IA</div>
+          <ul class="bl">
+            <li>Fundei a Avenix em março de 2025 (formalizada em outubro) — liderando fluxos de design de produto, captação de clientes e crescimento</li>
+            <li>Desenhei e desenvolvi ecossistemas de encomendas para restaurantes, integrando menus QR e dashboards analíticos</li>
+            <li>Líder técnico no desenvolvimento e arquitetura de sistemas para clientes, gerindo implementações em produção</li>
+            <li>Coordeno fluxos de design e desenvolvimento, colaborando de perto com parceiros estratégicos e stakeholders dos clientes</li>
+          </ul>
+        </div>
+
+        <!-- LITCAL -->
+        <div class="entry">
+          <div class="e-head">
+            <div>
+              <div class="e-role">Criador &amp; Líder de Produto</div>
+              <div class="e-org">LITCAL <span style="font-style:normal;font-weight:400;font-size:7.5pt;color:#7A90A8;">(by Avenix)</span></div>
+            </div>
+            <div class="e-date">2024 – Presente</div>
+          </div>
+          <div class="e-meta">App iOS &nbsp;·&nbsp; Monitorização Nutricional com IA &nbsp;·&nbsp; App Store</div>
+          <ul class="bl">
+            <li>Idealizei e lancei a LitCal — app iOS com IA que analisa fotos de refeições para detalhamento instantâneo de macros e calorias</li>
+            <li>Responsável pelo ciclo completo de produto: design UX, desenvolvimento full-stack, submissão e monetização</li>
+            <li>Alcancei mais de 200 downloads através de parcerias com influenciadores e marketing de crescimento</li>
+            <li>Disponível na App Store com utilizadores ativos e monetização por subscrição</li>
+          </ul>
+        </div>
+
+        <!-- FREELANCE -->
+        <div class="entry">
+          <div class="e-head">
+            <div>
+              <div class="e-role">Programador Freelance</div>
+              <div class="e-org">Trabalho Independente</div>
+            </div>
+            <div class="e-date">2024</div>
+          </div>
+          <ul class="bl">
+            <li>Desenvolvi aplicações web e fluxos de automação (n8n/Make) para clientes independentes</li>
+            <li>Desenhei interfaces responsivas e automatizei processos para resolver gargalos operacionais</li>
+            <li>Prestei suporte técnico contínuo e manutenção pós-lançamento</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUNA DIREITA -->
+    <div class="col-side">
+      <!-- FORMAÇÃO ACADÉMICA -->
+      <div class="sec">
+        <div class="sec-title">Formação Académica</div>
+        <div class="edu-card">
+          <div class="edu-deg">Licenciatura em Gestão,<br/>Administração e Mercadologia</div>
+          <div class="edu-inst">Universidade Óscar Ribas</div>
+          <div class="edu-meta">2023 – Presente &nbsp;·&nbsp; A frequentar o 2.º Ano</div>
+          <div class="edu-note">Gestão Estratégica · Análise de Dados · E-Commerce</div>
+        </div>
+      </div>
+
+      <!-- COMPETÊNCIAS PROFISSIONAIS -->
+      <div class="sec">
+        <div class="sec-title">Competências Profissionais</div>
+
+        <div class="sk">
+          <div class="sk-cat">Desenvolvimento de Software</div>
+          <div class="sk-items">React Native · TypeScript · JavaScript · React · Next.js · iOS &amp; Android · APIs REST · Supabase · PostgreSQL</div>
+        </div>
+
+        <div class="sk">
+          <div class="sk-cat">IA &amp; Automação</div>
+          <div class="sk-items">API da OpenAI · GPT-4 Vision · API do Claude · n8n · Make · Agentes IA · Engenharia de Prompts</div>
+        </div>
+
+        <div class="sk">
+          <div class="sk-cat">Produto &amp; Design</div>
+          <div class="sk-items">Gestão de Produto · Design UX/UI · Figma · Identidade de Marca · Roadmapping · ASO · Go-to-Market</div>
+        </div>
+
+        <div class="sk">
+          <div class="sk-cat">Gestão &amp; Liderança</div>
+          <div class="sk-items">Criação de Empresas · Angariação de Clientes · Desenvolvimento de Negócios · Planeamento Estratégico · Negociação</div>
+        </div>
+      </div>
+
+      <!-- FERRAMENTAS & TECNOLOGIAS -->
+      <div class="sec">
+        <div class="sec-title">Ferramentas &amp; Tecnologias</div>
+        <div class="badges">
+          <span class="badge">Supabase</span>
+          <span class="badge">OpenAI API</span>
+          <span class="badge">Claude</span>
+          <span class="badge">Claude Code</span>
+          <span class="badge">n8n</span>
+          <span class="badge">Make</span>
+          <span class="badge">Expo</span>
+          <span class="badge">Android Studio</span>
+          <span class="badge">RevenueCat</span>
+          <span class="badge">Mixpanel</span>
+          <span class="badge">Resend</span>
+          <span class="badge">Figma</span>
+          <span class="badge">Canva</span>
+          <span class="badge">Next.js</span>
+          <span class="badge">Vercel</span>
+          <span class="badge">GitHub</span>
+          <span class="badge">EAS Build</span>
+          <span class="badge">TestFlight</span>
+          <span class="badge">App Store Connect</span>
+          <span class="badge">Cursor</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RODAPÉ -->
+  <div class="footer">
+    <span>Erick Rodrigues &nbsp;·&nbsp; erickrodrigues781@gmail.com &nbsp;·&nbsp; +244 944 345 250</span>
+    <span>Página 1 de 2</span>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════ PÁGINA 2 ═══════════════════════════ -->
+<div class="page">
+
+  <!-- CABEÇALHO COMPACTO PÁGINA 2 -->
+  <div class="hd-p2">
+    <h2>Erick Rodrigues</h2>
+    <div class="sub2">Desenvolvedor de Software &amp; Empreendedor</div>
+    <div class="con2">erickrodrigues781@gmail.com &nbsp;·&nbsp; +244 944 345 250</div>
+  </div>
+  <hr class="hd-rule2"/>
+
+  <!-- CORPO -->
+  <div class="body">
+    <!-- COLUNA ESQUERDA -->
+    <div class="col-main">
+
+      <!-- EXPERIÊNCIA CONTINUAÇÃO -->
+      <div class="sec">
+        <div class="sec-title">Experiência Profissional (Continuação)</div>
+
+        <!-- AMUSE -->
+        <div class="entry">
+          <div class="e-head">
+            <div>
+              <div class="e-role">Assistente Comercial</div>
+              <div class="e-org">AMUSE — Mundial Seguros</div>
+            </div>
+            <div class="e-date">2022 – 2023</div>
+          </div>
+          <ul class="bl">
+            <li>Atingi e superei consistentemente os objetivos de vendas mensais num ambiente competitivo na área dos seguros</li>
+            <li>Criei um sistema interno de acompanhamento de clientes para otimizar a visibilidade do funil de vendas e o rigor do follow-up</li>
+            <li>Identifiquei novas oportunidades de negócio através de análises de mercado estruturadas</li>
+          </ul>
+        </div>
+
+        <!-- CFG -->
+        <div class="entry">
+          <div class="e-head">
+            <div>
+              <div class="e-role">Analista de Relatórios &amp; Tradutor</div>
+              <div class="e-org">CFG &amp; Triple Sports</div>
+            </div>
+            <div class="e-date">2020 – 2022</div>
+          </div>
+          <ul class="bl">
+            <li>Produzi documentação técnica bilingue para parceiros internacionais (Inglês/Português)</li>
+            <li>Desenvolvi um glossário interno de terminologia para padronizar a comunicação entre equipas</li>
+            <li>Facilitei a articulação entre as equipas locais e os parceiros estrangeiros</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PROJETOS RELEVANTES -->
+      <div class="sec">
+        <div class="sec-title">Projetos Relevantes</div>
+
+        <!-- LITCAL -->
+        <div class="proj">
+          <div class="p-head">
+            <div class="p-name">LitCal</div>
+            <div class="p-badge">Live · App Store</div>
+          </div>
+          <div class="p-hook">"Aponte a câmara para uma refeição. Obtenha a informação nutricional em segundos."</div>
+          <div class="p-desc">App de nutrição iOS com IA. Usa GPT-4 Vision para calcular macros e calorias via fotos de refeições. Disponível na App Store com monetização por subscrição.</div>
+          <div class="tags">
+            <span class="tag">React Native</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">GPT-4 Vision</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">RevenueCat</span>
+            <span class="tag">iOS</span>
+            <span class="tag">App Store</span>
+          </div>
+        </div>
+
+        <!-- TERRA NOSTRA -->
+        <div class="proj">
+          <div class="p-head">
+            <div class="p-name">Terra Nostra — Sistema Digital para Restaurantes</div>
+            <div class="p-badge">Live</div>
+          </div>
+          <div class="p-hook">"Menu QR e ecossistema de encomendas para restauração local."</div>
+          <div class="p-desc">Ecossistema completo de pedidos implementado para o Terra Nostra sob a Avenix. Integra menus digitais em tempo real, entrega e painel de gestão de pedidos.</div>
+          <div class="tags">
+            <span class="tag">Full-Stack</span>
+            <span class="tag">Pedidos via QR</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">Painel de Controlo</span>
+          </div>
+        </div>
+
+        <!-- GAJAJADA -->
+        <div class="proj">
+          <div class="p-head">
+            <div class="p-name">Gajajada — Sistema de Encomendas Digital</div>
+            <div class="p-badge">Live</div>
+          </div>
+          <div class="p-hook">"E-commerce interativo e painel administrativo para sumos premium."</div>
+          <div class="p-desc">Sistema de encomendas personalizado construído e implementado para a marca Gajajada sob a Avenix. Inclui interface rápida de checkout, rotinas de pedidos e gestão.</div>
+          <div class="tags">
+            <span class="tag">Full-Stack</span>
+            <span class="tag">Pedidos via QR</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">UI/UX Avançado</span>
+          </div>
+        </div>
+
+        <!-- FACUL GROUP -->
+        <div class="proj">
+          <div class="p-head">
+            <div class="p-name">Grupo Facul — Website Institucional</div>
+            <div class="p-badge">Live · grupofacul.com</div>
+          </div>
+          <div class="p-hook">"Presença institucional profissional, desenhada para escalar."</div>
+          <div class="p-desc">Desenvolvimento do site corporativo do Grupo Facul com interface moderna, arquitetura de conteúdo otimizada e SEO robusto. Entregue em parceria com a AspireVerse.uk.</div>
+          <div class="tags">
+            <span class="tag">Web Development</span>
+            <span class="tag">UI/UX</span>
+            <span class="tag">SEO</span>
+            <span class="tag">AspireVerse.uk</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- COLUNA DIREITA -->
+    <div class="col-side">
+      <!-- IDIOMAS -->
+      <div class="sec">
+        <div class="sec-title">Domínio de Idiomas</div>
+        <div class="lang">
+          <span class="lang-name">Português</span>
+          <span class="lang-level">Nativo</span>
+        </div>
+        <div class="lang">
+          <span class="lang-name">Inglês</span>
+          <span class="lang-level">Fluente</span>
+        </div>
+      </div>
+
+      <!-- INFORMAÇÕES ADICIONAIS -->
+      <div class="sec">
+        <div class="sec-title">Informações Adicionais</div>
+        <ul class="add">
+          <li>Membro ativo da comunidade empreendedora de Luanda; participação regular em eventos de startups e tecnologia</li>
+          <li>Colaborador em parcerias e projetos internacionais entre o Reino Unido e a África</li>
+          <li>Disponibilidade para recolocação internacional. Aberto a oportunidades 100% remotas a nível global</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- RODAPÉ -->
+  <div class="footer">
+    <span>Erick Rodrigues &nbsp;·&nbsp; erickrodrigues781@gmail.com &nbsp;·&nbsp; +244 944 345 250</span>
+    <span>Página 2 de 2</span>
+  </div>
+
+</div>
+
+</body>
+</html>

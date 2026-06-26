@@ -1,0 +1,7 @@
+# Agent configuration - keep private
+.agents/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
