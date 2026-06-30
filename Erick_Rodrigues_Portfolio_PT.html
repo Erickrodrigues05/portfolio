@@ -1,1761 +1,545 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Erick Rodrigues — Desenvolvedor de Software &amp; Empreendedor | Portfólio</title>
-<meta name="description" content="Fundador, programador e criador de produtos angolano de 23 anos. Criador do LitCal (App Store), Avenix e muito mais. Disponível para recolocação internacional e aberto a oportunidades remotas globais."/>
-<meta name="author" content="Erick Rodrigues"/>
-<meta property="og:title" content="Erick Rodrigues — Desenvolvedor de Software &amp; Empreendedor"/>
-<meta property="og:description" content="Eu crio produtos que as pessoas realmente usam. Do zero à App Store — a solo."/>
-<meta property="og:type" content="website"/>
-<meta name="twitter:card" content="summary"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erick Rodrigues — Desenvolvedor de Software &amp; Fundador Técnico | Portfólio</title>
+<meta name="description" content="Engenheiro de software full-stack e fundador técnico. Criador da LitCal (App Store), fundador da Avenix. Disponível para contratos de engenharia remotos a nível global.">
+<meta property="og:title" content="Erick Rodrigues — Desenvolvedor de Software &amp; Fundador Técnico">
+<meta property="og:description" content="Construo software em produção que as pessoas realmente usam. Do primeiro commit à App Store — a solo.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 <style>
-
-/* ── RESET ──────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-/* ── TOKENS ─────────────────────────────────────────── */
-:root {
-  --bg-deep:    #070B12;
-  --bg-section: #0A0F1A;
-  --bg-card:    #0D1520;
-  --bg-glass:   rgba(255,255,255,0.04);
-  --border:     rgba(255,255,255,0.08);
-  --border-h:   rgba(59,130,246,0.30);
-  --accent:     #3B82F6;
-  --accent-lt:  #60A5FA;
-  --accent-dk:  #2563EB;
-  --accent-glow:rgba(59,130,246,0.15);
-  --accent-glow2:rgba(59,130,246,0.08);
-  --text-h:     #F0F4FF;
-  --text-body:  #94A3B8;
-  --text-muted: #4B5563;
-  --tag-bg:     rgba(59,130,246,0.10);
-  --tag-bd:     rgba(59,130,246,0.25);
-  --tag-tx:     #93C5FD;
-  --badge-bg:   rgba(255,255,255,0.06);
-  --badge-bd:   rgba(255,255,255,0.12);
-  --badge-tx:   #CBD5E1;
-  --success:    #10B981;
-  --nav-h:      72px;
-  --radius:     16px;
-  --container:  1200px;
-  --px:         clamp(20px,4vw,60px);
-  --py:         96px;
-}
-
-/* ── BASE ───────────────────────────────────────────── */
-body {
-  font-family: 'Inter', -apple-system, sans-serif;
-  background: var(--bg-deep);
-  color: var(--text-body);
-  font-size: 15px;
-  line-height: 1.7;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(59,130,246,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(139,92,246,0.06) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-section, nav, footer { position: relative; z-index: 1; }
-
-a { text-decoration: none; }
-ul { list-style: none; }
-
-/* ── SCROLL ANIMATIONS ──────────────────────────────── */
-.ai {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.ai.vis { opacity: 1; transform: translateY(0); }
-.ai:nth-child(1) { transition-delay: 0.00s; }
-.ai:nth-child(2) { transition-delay: 0.08s; }
-.ai:nth-child(3) { transition-delay: 0.16s; }
-.ai:nth-child(4) { transition-delay: 0.24s; }
-
-/* ── NAV ────────────────────────────────────────────── */
-.nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: var(--nav-h);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 var(--px);
-  z-index: 100;
-  transition: background 0.4s, border-color 0.4s;
-}
-.nav.scrolled {
-  background: rgba(7,11,18,0.90);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-}
-.nav-logo {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--text-h);
-  letter-spacing: -0.5px;
-}
-.nav-logo .logo-full { display: inline; }
-.nav-logo .logo-short { display: none; }
-@media (max-width: 1024px) {
-  .nav-logo .logo-full { display: none; }
-  .nav-logo .logo-short { display: inline; }
-}
-.nav-logo span { color: var(--accent); }
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-.nav-links a {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-body);
-  transition: color 0.2s;
-}
-.nav-links a:hover, .nav-links a.active { color: var(--accent); }
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.lang-switch {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.lang-btn {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0.5px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: color 0.2s, background 0.2s;
-}
-.lang-btn:hover { color: var(--accent); }
-.lang-btn.active { color: var(--accent); background: var(--accent-glow2); }
-.lang-sep { color: var(--text-muted); font-size: 10px; }
-.nav-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 9px 20px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  border-radius: 8px;
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-}
-.nav-cta:hover {
-  background: var(--accent-dk);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px var(--accent-glow);
-}
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  padding: 4px;
-}
-.hamburger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--text-h);
-  border-radius: 2px;
-  transition: transform 0.3s, opacity 0.3s;
-}
-.mobile-menu {
-  display: none;
-  position: fixed;
-  top: var(--nav-h);
-  left: 0; right: 0;
-  background: rgba(7,11,18,0.97);
-  backdrop-filter: blur(20px);
-  padding: 24px var(--px);
-  border-bottom: 1px solid var(--border);
-  flex-direction: column;
-  gap: 20px;
-  z-index: 99;
-}
-.mobile-menu.open { display: flex; }
-.mobile-menu a {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-body);
-}
-.mobile-menu a:hover { color: var(--accent); }
-
-/* ── HERO ───────────────────────────────────────────── */
-#hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: calc(var(--nav-h) + 40px) var(--px) 80px;
-}
-.hero-inner {
-  max-width: var(--container);
-  margin: 0 auto;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-}
-.hero-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--accent);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
-.hero-label::before {
-  content: '';
-  display: block;
-  width: 8px;
-  height: 8px;
-  background: var(--accent);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
-  50%       { box-shadow: 0 0 0 6px transparent; }
-}
-.hero-name {
-  font-size: clamp(48px,6vw,76px);
-  font-weight: 800;
-  color: var(--text-h);
-  line-height: 1.0;
-  letter-spacing: -2.5px;
-  margin-bottom: 16px;
-}
-.hero-name .accent-grad {
-  background: linear-gradient(135deg, var(--accent), var(--accent-lt));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero-title {
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--text-body);
-  margin-bottom: 24px;
-  min-height: 27px;
-}
-.typewriter { color: var(--accent-lt); }
-.cursor { animation: blink 1s infinite; color: var(--accent); }
-@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
-.hero-bio {
-  font-size: 16px;
-  color: var(--text-body);
-  line-height: 1.8;
-  max-width: 520px;
-  margin-bottom: 40px;
-}
-.hero-bio strong { color: var(--text-h); }
-.hero-btns {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 28px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 10px;
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-}
-.btn-primary:hover {
-  background: var(--accent-dk);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px var(--accent-glow);
-}
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 28px;
-  background: transparent;
-  color: var(--text-h);
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  transition: border-color 0.2s, color 0.2s, transform 0.2s;
-}
-.btn-secondary:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px);
-}
-
-/* ── PORTRAIT ───────────────────────────────────────── */
-.hero-visual { display: flex; justify-content: center; align-items: center; }
-@keyframes float {
-  0%,100% { transform: translateY(0px); }
-  50%      { transform: translateY(-14px); }
-}
-.portrait-wrap {
-  position: relative;
-  animation: float 6s ease-in-out infinite;
-  width: 100%;
-  max-width: 380px;
-}
-.portrait-glow {
-  position: absolute;
-  inset: -4px;
-  border-radius: 24px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-lt), transparent 70%);
-  opacity: 0.55;
-  filter: blur(18px);
-  z-index: 0;
-  animation: glow-pulse 4s ease-in-out infinite;
-}
-@keyframes glow-pulse {
-  0%,100% { opacity: 0.45; transform: scale(1); }
-  50%      { opacity: 0.75; transform: scale(1.04); }
-}
-.portrait-ring {
-  position: relative;
-  z-index: 1;
-  border-radius: 22px;
-  padding: 3px;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-lt) 50%, rgba(37,99,235,0.2) 100%);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(37,99,235,0.25);
-}
-.portrait-img {
-  display: block;
-  width: 100%;
-  height: 420px;
-  object-fit: cover;
-  object-position: center top;
-  border-radius: 20px;
-  filter: brightness(1.02) contrast(1.02);
-}
-.portrait-badge {
-  position: absolute;
-  bottom: -16px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  background: rgba(13,21,32,0.92);
-  border: 1px solid var(--border);
-  border-radius: 50px;
-  padding: 8px 18px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-h);
-  white-space: nowrap;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-}
-.portrait-badge::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #22c55e;
-  animation: pulse 2s infinite;
-  flex-shrink: 0;
-}
-
-
-/* ── LIVE PREVIEW MODAL ────────────────────────────── */
-.preview-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: rgba(7,11,18,0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px var(--px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-.preview-modal.active {
-  opacity: 1;
-  pointer-events: all;
-}
-.preview-window {
-  width: 100%;
-  max-width: 1100px;
-  height: 80vh;
-  background: #0d1520;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: 0 40px 120px rgba(0,0,0,0.7);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transform: scale(0.95) translateY(20px);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.preview-modal.active .preview-window {
-  transform: scale(1) translateY(0);
-}
-.preview-header {
-  height: 48px;
-  background: rgba(255,255,255,0.02);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-}
-.preview-dots {
-  display: flex;
-  gap: 8px;
-}
-.preview-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-.preview-dot.r { background: #FF5F57; }
-.preview-dot.y { background: #FFBD2E; }
-.preview-dot.g { background: #28C840; }
-
-.preview-address {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 4px 16px;
-  font-family: monospace;
-  font-size: 13px;
-  color: var(--text-body);
-  width: 100%;
-  max-width: 500px;
-  text-align: center;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.preview-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.preview-view-btn {
-  background: none;
-  border: none;
-  color: var(--text-body);
-  font-size: 14px;
-  cursor: pointer;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition: color 0.2s, background 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.preview-view-btn:hover, .preview-view-btn.active {
-  color: var(--accent-lt);
-  background: rgba(37,99,235,0.12);
-}
-.preview-close {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-size: 24px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  transition: color 0.2s, background 0.2s;
-}
-.preview-close:hover {
-  color: var(--text-h);
-  background: rgba(255,255,255,0.08);
-}
-.preview-body {
-  flex: 1;
-  background: #070b12;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-.preview-iframe-wrapper {
-  width: 100%;
-  height: 100%;
-  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.preview-iframe-wrapper.mobile {
-  width: 375px;
-  max-height: 667px;
-  border-radius: 20px;
-  border: 12px solid #1f2937;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-  overflow: hidden;
-}
-.preview-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  background: #fff;
-}
-
-
-/* ── MOBILE PREVIEW OVERRIDES ───────────────────── */
-@media (max-width: 768px) {
-  .preview-view-btn {
-    display: none !important;
+  :root {
+    --navy-bg: #0a0e1a;
+    --navy-surface: #11162580;
+    --navy-border: #1f2740;
+    --blue-accent: #4d8aff;
+    --blue-bright: #6ea1ff;
+    --text-primary: #f4f6fb;
+    --text-secondary: #aab2c8;
+    --text-muted: #6e7891;
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
-  .preview-iframe-wrapper.mobile {
-    width: 100% !important;
-    height: 100% !important;
-    max-height: none !important;
-    border: none !important;
-    border-radius: 0 !important;
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy-bg);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
-  .preview-window {
-    height: 90vh;
-    border-radius: 12px;
+
+  a { color: inherit; text-decoration: none; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10, 14, 26, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--navy-border);
   }
-  .preview-body {
-    padding: 10px;
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px; max-width: 1100px; margin: 0 auto;
   }
-}
+  .nav-logo { font-weight: 700; font-size: 18px; color: var(--blue-bright); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a { font-size: 14.5px; color: var(--text-secondary); transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a:focus-visible { color: var(--text-primary); }
+  .nav-lang { font-size: 13px; color: var(--text-muted); display: flex; gap: 6px; align-items: center; }
+  .nav-lang a.active { color: var(--blue-bright); font-weight: 600; }
+  .nav-cta {
+    background: var(--blue-accent); color: #fff; padding: 10px 20px;
+    border-radius: 8px; font-size: 14px; font-weight: 600; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--blue-bright); }
 
-/* ── INTERACTIVE BUTTON ON CARD ────────────────── */
-.btn-interactive-trigger {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  background: rgba(13,21,32,0.85);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 6px 12px;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-h);
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
-  backdrop-filter: blur(8px);
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.btn-interactive-trigger:hover {
-  background: var(--accent);
-  border-color: var(--accent-lt);
-  transform: translateY(-1px);
-}
+  .hero {
+    display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: center;
+    padding: 100px 32px 80px; max-width: 1100px; margin: 0 auto;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12.5px; letter-spacing: 0.08em; color: var(--blue-bright);
+    font-weight: 600; margin-bottom: 20px;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: #34d399; box-shadow: 0 0 8px #34d399; }
+  .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; }
+  .hero h1 .accent { color: var(--blue-bright); }
+  .hero-role { font-size: 19px; color: var(--blue-bright); margin-top: 16px; font-weight: 500; }
+  .hero p.lede { margin-top: 20px; font-size: 16.5px; color: var(--text-secondary); max-width: 52ch; }
+  .hero-actions { margin-top: 32px; display: flex; gap: 14px; }
+  .btn-primary {
+    background: var(--blue-accent); color: #fff; padding: 13px 24px; border-radius: 8px;
+    font-weight: 600; font-size: 14.5px; transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--blue-bright); }
+  .btn-secondary {
+    border: 1px solid var(--navy-border); color: var(--text-primary); padding: 13px 24px;
+    border-radius: 8px; font-weight: 600; font-size: 14.5px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--blue-accent); background: rgba(77,138,255,0.08); }
 
-/* ── SECTION BASE ───────────────────────────────────── */
-.section {
-  padding: var(--py) var(--px);
-}
-.section-inner {
-  max-width: var(--container);
-  margin: 0 auto;
-}
-.section-header { margin-bottom: 64px; }
-.section-label {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: var(--accent);
-  margin-bottom: 10px;
-}
-.section-title {
-  font-size: clamp(28px,4vw,42px);
-  font-weight: 800;
-  color: var(--text-h);
-  letter-spacing: -1px;
-  line-height: 1.1;
-}
-.section-sub {
-  font-size: 16px;
-  color: var(--text-body);
-  max-width: 560px;
-  margin-top: 14px;
-  line-height: 1.7;
-}
+  .hero-photo-wrap { position: relative; justify-self: center; }
+  .hero-photo { width: 280px; height: 340px; object-fit: cover; border-radius: 16px; border: 1px solid var(--navy-border); }
+  .hero-tag {
+    position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
+    background: #0f1422; border: 1px solid var(--navy-border); padding: 8px 16px;
+    border-radius: 999px; font-size: 12.5px; color: var(--text-secondary);
+    display: flex; align-items: center; gap: 6px; white-space: nowrap;
+  }
+  .hero-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: #34d399; }
 
-/* ── CARD BASE ──────────────────────────────────────── */
-.card {
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(59,130,246,0.2);
-  border-color: var(--border-h);
-}
+  section { padding: 90px 32px; max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { font-size: 12.5px; letter-spacing: 0.1em; color: var(--blue-bright); font-weight: 700; margin-bottom: 14px; }
+  .section-title { font-size: 36px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 16px; }
+  .section-sub { color: var(--text-secondary); font-size: 16px; max-width: 60ch; margin-bottom: 48px; }
 
-/* ── ABOUT ──────────────────────────────────────────── */
-#about { background: var(--bg-section); }
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: start;
-}
-.about-text { font-size: 16px; line-height: 1.8; color: var(--text-body); }
-.about-text p { margin-bottom: 20px; }
-.about-text strong { color: var(--text-h); }
-.about-text em { color: var(--accent-lt); font-style: normal; font-weight: 600; }
-.about-traits {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 28px;
-}
-.trait {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--tag-tx);
-  background: var(--tag-bg);
-  border: 1px solid var(--tag-bd);
-  padding: 6px 14px;
-  border-radius: 20px;
-}
-.about-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.stat-card {
-  padding: 28px;
-  border-radius: var(--radius);
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-}
-.stat-num {
-  font-size: 42px;
-  font-weight: 800;
-  color: var(--text-h);
-  letter-spacing: -2px;
-  line-height: 1;
-}
-.stat-num span { color: var(--accent); }
-.stat-label { font-size: 14px; color: var(--text-body); margin-top: 4px; }
-.avail-card {
-  padding: 20px 24px;
-  background: rgba(16,185,129,0.08);
-  border: 1px solid rgba(16,185,129,0.2);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.avail-dot {
-  width: 10px; height: 10px;
-  background: #10B981;
-  border-radius: 50%;
-  flex-shrink: 0;
-  animation: pulse-green 2s infinite;
-}
-@keyframes pulse-green {
-  0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
-  50%      { box-shadow: 0 0 0 6px transparent; }
-}
-.avail-text { font-size: 14px; font-weight: 600; color: #10B981; }
+  .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; }
+  .about-text p { color: var(--text-secondary); margin-bottom: 18px; font-size: 15.5px; }
+  .about-text strong { color: var(--text-primary); }
+  .stat-cards { display: flex; flex-direction: column; gap: 16px; }
+  .stat-card { border: 1px solid var(--navy-border); background: var(--navy-surface); border-radius: 12px; padding: 22px 24px; }
+  .stat-num { font-size: 32px; font-weight: 800; }
+  .stat-num .plus { color: var(--blue-bright); }
+  .stat-label { color: var(--text-muted); font-size: 13.5px; margin-top: 4px; }
+  .stat-card.open {
+    border-color: #1d4732; background: rgba(52,211,153,0.06);
+    display: flex; align-items: center; gap: 10px; font-size: 14px; color: #6ee7b7; font-weight: 600;
+  }
+  .stat-card.open .dot { width: 7px; height: 7px; border-radius: 50%; background: #34d399; }
 
-/* ── PROJECTS ───────────────────────────────────────── */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 24px;
-}
-.proj-card {
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.proj-visual {
-  height: 140px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 52px;
-  margin-bottom: 4px;
-  position: relative;
-  overflow: hidden;
-}
-.proj-badges {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.badge-live {
-  font-size: 11px;
-  font-weight: 700;
-  color: #10B981;
-  background: rgba(16,185,129,0.12);
-  border: 1px solid rgba(16,185,129,0.25);
-  padding: 3px 10px;
-  border-radius: 20px;
-  letter-spacing: 0.3px;
-}
-.badge-type {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--badge-tx);
-  background: var(--badge-bg);
-  border: 1px solid var(--badge-bd);
-  padding: 3px 10px;
-  border-radius: 20px;
-}
-.proj-hook {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--accent-lt);
-  font-style: italic;
-  line-height: 1.4;
-}
-.proj-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text-h);
-  letter-spacing: -0.3px;
-  line-height: 1.2;
-}
-.proj-desc {
-  font-size: 14px;
-  color: var(--text-body);
-  line-height: 1.7;
-  flex: 1;
-}
-.proj-outcome {
-  font-size: 12px;
-  font-weight: 600;
-  color: #10B981;
-  background: rgba(16,185,129,0.08);
-  padding: 6px 12px;
-  border-radius: 6px;
-}
-.proj-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.tag {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--tag-tx);
-  background: var(--tag-bg);
-  border: 1px solid var(--tag-bd);
-  padding: 3px 9px;
-  border-radius: 4px;
-  white-space: nowrap;
-  letter-spacing: 0.2px;
-}
-.proj-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--accent);
-  margin-top: 4px;
-  transition: gap 0.2s;
-}
-.proj-cta:hover { gap: 10px; }
+  .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .project-card {
+    border: 1px solid var(--navy-border); border-radius: 14px; overflow: hidden;
+    background: var(--navy-surface); display: flex; flex-direction: column;
+  }
+  .project-thumb {
+    height: 160px; display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 600; position: relative;
+  }
+  .project-thumb-link {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .demo-badge {
+    position: absolute; top: 12px; right: 12px;
+    display: flex; align-items: center; gap: 5px;
+    background: rgba(10, 14, 26, 0.78);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.16);
+    color: #fff;
+    font-size: 11.5px; font-weight: 600;
+    padding: 6px 11px; border-radius: 999px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .demo-badge:hover { background: rgba(10, 14, 26, 0.95); border-color: var(--blue-bright); }
+  .demo-badge .bolt { color: #fbbf24; }
+  .project-thumb.litcal { background: linear-gradient(135deg, #2451c7, #4d8aff); }
+  .project-thumb.terra { background: linear-gradient(135deg, #0d6b52, #18a978); }
+  .project-thumb.gaja { background: linear-gradient(135deg, #c4581a, #e8852f); }
+  .project-thumb.facul { background: linear-gradient(135deg, #4b3f8a, #7c64d6); }
+  .project-body { padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .project-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag { font-size: 11.5px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--navy-border); color: var(--text-secondary); }
+  .tag.live { color: #6ee7b7; border-color: #1d4732; }
+  .project-quote { font-style: italic; color: var(--blue-bright); font-size: 14px; }
+  .project-title { font-size: 19px; font-weight: 700; }
+  .project-desc { color: var(--text-secondary); font-size: 14px; }
+  .project-metric { color: var(--text-muted); font-size: 13px; }
+  .project-stack { color: var(--text-muted); font-size: 12.5px; margin-top: 4px; }
+  .project-link { color: var(--blue-bright); font-size: 13.5px; font-weight: 600; margin-top: auto; padding-top: 8px; }
+  .project-link:hover { text-decoration: underline; }
 
-/* ── EXPERIENCE ─────────────────────────────────────── */
-#experience { background: var(--bg-section); }
-.exp-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  position: relative;
-  padding-left: 48px;
-}
-.exp-list::before {
-  content: '';
-  position: absolute;
-  left: 16px;
-  top: 6px; bottom: 6px;
-  width: 1px;
-  background: linear-gradient(to bottom, var(--accent), rgba(59,130,246,0.0));
-}
-.exp-item {
-  position: relative;
-}
-.exp-dot {
-  position: absolute;
-  left: -38px;
-  top: 22px;
-  width: 12px; height: 12px;
-  background: var(--accent);
-  border-radius: 50%;
-  box-shadow: 0 0 0 3px var(--accent-glow2);
-}
-.exp-card {
-  padding: 24px 28px;
-}
-.exp-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 6px;
-  flex-wrap: wrap;
-}
-.exp-role {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text-h);
-  letter-spacing: -0.3px;
-}
-.exp-company {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--accent);
-  font-style: italic;
-}
-.exp-date {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-muted);
-  background: var(--badge-bg);
-  border: 1px solid var(--border);
-  padding: 4px 12px;
-  border-radius: 20px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.exp-type {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-style: italic;
-  margin-bottom: 14px;
-}
-.exp-bullets { padding-left: 0; }
-.exp-bullets li {
-  font-size: 14px;
-  color: var(--text-body);
-  padding-left: 16px;
-  position: relative;
-  margin-bottom: 6px;
-  line-height: 1.6;
-}
-.exp-bullets li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 10px;
-  width: 6px; height: 1.5px;
-  background: var(--accent);
-}
-.exp-bullets li strong { color: var(--text-h); }
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content: ''; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 1px; background: var(--navy-border); }
+  .timeline-item { position: relative; margin-bottom: 28px; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -28px; top: 6px; width: 11px; height: 11px;
+    border-radius: 50%; background: var(--blue-accent); border: 2px solid var(--navy-bg);
+  }
+  .job-card { border: 1px solid var(--navy-border); background: var(--navy-surface); border-radius: 12px; padding: 26px 28px; }
+  .job-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+  .job-title { font-size: 18px; font-weight: 700; }
+  .job-company { color: var(--blue-bright); font-style: italic; font-size: 14.5px; margin-top: 2px; }
+  .job-meta { color: var(--text-muted); font-size: 13px; margin-top: 2px; }
+  .job-date {
+    font-size: 12.5px; color: var(--text-muted); border: 1px solid var(--navy-border);
+    padding: 5px 12px; border-radius: 999px; white-space: nowrap;
+  }
+  .job-bullets { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .job-bullets li { color: var(--text-secondary); font-size: 14.5px; padding-left: 18px; position: relative; }
+  .job-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--blue-accent); }
 
-/* ── SKILLS ─────────────────────────────────────────── */
-.skills-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-}
-.skill-cats { display: flex; flex-direction: column; gap: 24px; }
-.skill-cat { }
-.skill-cat-name {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-h);
-  margin-bottom: 8px;
-}
-.skill-items {
-  font-size: 14px;
-  color: var(--text-body);
-  line-height: 1.7;
-}
-.tools-section { }
-.tools-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-h);
-  margin-bottom: 16px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-}
-.tools-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 10px;
-}
-.tool-badge {
-  background: var(--badge-bg);
-  border: 1px solid var(--badge-bd);
-  color: var(--badge-tx);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 5px 12px;
-  border-radius: 6px;
-  white-space: nowrap;
-  letter-spacing: 0.3px;
-  transition: border-color 0.2s, color 0.2s;
-}
-.tool-badge:hover {
-  border-color: var(--accent);
-  color: var(--accent-lt);
-}
-.edu-section {
-  margin-top: 40px;
-  padding: 24px 28px;
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-.edu-deg { font-size: 17px; font-weight: 700; color: var(--text-h); line-height: 1.3; }
-.edu-inst { font-size: 14px; font-weight: 600; color: var(--accent); font-style: italic; margin-top: 4px; }
-.edu-meta { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
-.edu-note { font-size: 13px; color: var(--text-body); margin-top: 6px; font-style: italic; }
-.lang-list { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
-.lang-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.lang-name { font-size: 14px; font-weight: 600; color: var(--text-h); }
-.lang-level {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--tag-tx);
-  background: var(--tag-bg);
-  border: 1px solid var(--tag-bd);
-  padding: 3px 10px;
-  border-radius: 20px;
-  letter-spacing: 0.3px;
-}
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  .skill-cat { margin-bottom: 28px; }
+  .skill-cat h4 { font-size: 14.5px; font-weight: 700; margin-bottom: 8px; }
+  .skill-cat p { color: var(--text-secondary); font-size: 14px; line-height: 1.7; }
+  .tool-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    font-size: 12.5px; padding: 7px 14px; border-radius: 8px;
+    border: 1px solid var(--navy-border); color: var(--text-secondary); background: var(--navy-surface);
+  }
+  .lang-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--navy-border); }
+  .lang-row:last-child { border-bottom: none; }
+  .lang-badge { font-size: 12px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--navy-border); color: var(--text-secondary); }
 
-/* ── CONTACT ────────────────────────────────────────── */
-#contact { background: var(--bg-section); text-align: center; }
-.contact-inner { max-width: 600px; margin: 0 auto; }
-.contact-email {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: clamp(20px,3vw,28px);
-  font-weight: 700;
-  color: var(--text-h);
-  margin: 32px 0;
-  padding: 18px 32px;
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: border-color 0.2s, color 0.2s, transform 0.2s;
-}
-.contact-email:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: scale(1.02);
-}
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 32px;
-}
-.social-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-  color: var(--text-body);
-  font-size: 13px;
-  font-weight: 600;
-  border-radius: 8px;
-  transition: border-color 0.2s, color 0.2s, transform 0.2s;
-}
-.social-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px);
-}
+  .contact-box {
+    text-align: center; border: 1px solid var(--navy-border); background: var(--navy-surface);
+    border-radius: 20px; padding: 64px 40px;
+  }
+  .contact-box h2 { font-size: 32px; font-weight: 800; margin-bottom: 14px; }
+  .contact-box p { color: var(--text-secondary); max-width: 50ch; margin: 0 auto 32px; }
+  .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 8px; border: 1px solid var(--navy-border);
+    padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--blue-accent); color: var(--blue-bright); }
 
-/* ── FOOTER ─────────────────────────────────────────── */
-footer {
-  padding: 40px var(--px);
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-.footer-name { font-size: 14px; font-weight: 600; color: var(--text-h); }
-.footer-copy { font-size: 13px; color: var(--text-muted); }
-.footer-top {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-body);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: color 0.2s;
-}
-.footer-top:hover { color: var(--accent); }
+  footer { text-align: center; padding: 40px 32px; color: var(--text-muted); font-size: 13px; border-top: 1px solid var(--navy-border); }
+  footer a { color: var(--text-muted); margin-top: 8px; display: inline-block; }
+  footer a:hover { color: var(--blue-bright); }
 
-/* ── RESPONSIVE ─────────────────────────────────────── */
-@media (max-width: 1024px) {
-  .hero-inner   { gap: 48px; }
-  .about-grid   { gap: 40px; }
-  .skills-layout{ gap: 32px; }
-}
-@media (max-width: 768px) {
-  :root { --py: 64px; }
-  .nav-links, .nav-cta { display: none; }
-  .hamburger { display: flex; }
-  .hero-inner   { grid-template-columns: 1fr; gap: 48px; }
-  .hero-visual  { order: -1; }
-  .hero-name    { font-size: clamp(38px,10vw,56px); }
-  .about-grid   { grid-template-columns: 1fr; }
-  .skills-layout{ grid-template-columns: 1fr; }
-  .exp-list     { padding-left: 32px; }
-  .projects-grid{ grid-template-columns: 1fr; }
-  footer        { flex-direction: column; text-align: center; }
-}
-@media (max-width: 480px) {
-  .hero-btns { flex-direction: column; }
-  .hero-btns a { justify-content: center; }
-}
-
-/* ── PRINT ──────────────────────────────────────────── */
-@media print {
-  .nav, .hero-visual, footer .footer-top { display: none; }
-  body { background: white; color: black; }
-  .card { box-shadow: none; border: 1px solid #ddd; }
-}
-
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding-top: 64px; text-align: left; }
+    .hero-photo-wrap { justify-self: start; }
+    .hero h1 { font-size: 40px; }
+    .about-grid, .skills-grid { grid-template-columns: 1fr; gap: 32px; }
+    .project-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
-<nav class="nav" id="nav">
-  <div class="nav-logo"><span class="logo-full">Erick Viegas Rodrigues</span><span class="logo-short">Erick</span><span>.</span></div>
-  <ul class="nav-links">
-    <li><a href="#about">Sobre</a></li>
-    <li><a href="#projects">Projetos</a></li>
-    <li><a href="#experience">Experiência</a></li>
-    <li><a href="#skills">Competências</a></li>
-    <li><a href="#contact">Contacto</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="lang-switch">
-      <a href="index.html" class="lang-btn">EN</a>
-      <span class="lang-sep">·</span>
-      <a href="Erick_Rodrigues_Portfolio_PT.html" class="lang-btn active">PT</a>
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Erick Rodrigues.</div>
+    <div class="nav-links">
+      <a href="#about">Sobre</a>
+      <a href="#projects">Projetos</a>
+      <a href="#experience">Experiência</a>
+      <a href="#skills">Competências</a>
+      <a href="#contact">Contacto</a>
     </div>
-    <a href="#contact" class="nav-cta">Vamos Conversar →</a>
+    <div style="display:flex; align-items:center; gap:20px;">
+      <div class="nav-lang">
+        <a href="Erick_Rodrigues_Portfolio_EN.html">EN</a>·<a href="Erick_Rodrigues_Portfolio_PT.html" class="active">PT</a>
+      </div>
+      <a href="#contact" class="nav-cta">Vamos Falar →</a>
+    </div>
   </div>
-  <button class="hamburger" id="hamburger" aria-label="Menu principal">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
-<!-- Mobile menu -->
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#about">Sobre</a>
-  <a href="#projects">Projetos</a>
-  <a href="#experience">Experiência</a>
-  <a href="#skills">Competências</a>
-  <a href="#contact">Contacto</a>
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<div class="hero">
+  <div>
+    <div class="eyebrow"><span class="dot"></span> DISPONÍVEL PARA CONTRATAÇÃO</div>
+    <h1>Erick<br><span class="accent">Rodrigues</span></h1>
+    <div class="hero-role">Desenvolvedor de Software &amp; Fundador Técnico</div>
+    <p class="lede">
+      Engenheiro full-stack especializado em sistemas de produção e integração de IA.
+      Fundei a Avenix — 11+ projetos entregues, 30+ deployments em produção geridos.
+      Desenvolvi e lancei a LitCal, uma app iOS com IA, do primeiro commit à App Store
+      em 2 semanas.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">Ver Trabalho ↓</a>
+      <a href="#contact" class="btn-secondary">Entrar em Contacto</a>
+    </div>
+  </div>
+  <div class="hero-photo-wrap">
+    <img src="profile.jpeg" alt="Erick Rodrigues" class="hero-photo">
+    <div class="hero-tag"><span class="dot"></span> Disponível para Contratação</div>
+  </div>
 </div>
 
-<!-- ═══════════════════════════ HERO ══════════════════════════ -->
-<section id="hero">
-  <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-label">Disponível para contratação</div>
-      <h1 class="hero-name">Erick<br/><span class="accent-grad">Rodrigues</span></h1>
-      <div class="hero-title">
-        <span class="typewriter"></span><span class="cursor">|</span>
-      </div>
-      <p class="hero-bio">
-        Tenho <strong>23 anos</strong>. Lidero o design de produto e o desenvolvimento full-stack de ponta a ponta,
-        transformando ideias ambiciosas em soluções reais em produção. Como fundador da Avenix, crio sistemas
-        escaláveis, colaboro com parceiros estratégicos e assumo a responsabilidade pelo produto desde o primeiro dia.
+<!-- ── ABOUT ────────────────────────────────────────────── -->
+<section id="about">
+  <div class="section-eyebrow">SOBRE MIM</div>
+  <h2 class="section-title">O engenheiro por trás do trabalho</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        Sou engenheiro de software full-stack especializado em sistemas de produção,
+        integração de IA e entrega de produto de ponta a ponta. Fundei a <strong>Avenix</strong>
+        em março de 2025 — agência de software e automação com 11+ projetos entregues e
+        30+ deployments em produção geridos em hotelaria, gestão de frotas e setor institucional.
       </p>
-      <div class="hero-btns">
-        <a href="#projects" class="btn-primary">Ver Meu Trabalho ↓</a>
-        <a href="#contact" class="btn-secondary">Entrar em Contacto</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="portrait-wrap">
-        <div class="portrait-glow"></div>
-        <div class="portrait-ring">
-          <img
-            src="profile.jpeg"
-            alt="Erick Rodrigues — Fundador & Líder de Produto"
-            class="portrait-img"
-            loading="eager"
-          />
-        </div>
-        <div class="portrait-badge">Disponível para Contratação</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════ ABOUT ═════════════════════════ -->
-<section class="section" id="about">
-  <div class="section-inner">
-    <div class="about-grid">
-      <div class="about-text ai">
-        <div class="section-label">Sobre Mim</div>
-        <h2 class="section-title" style="text-align:left;margin-bottom:24px;">A pessoa por trás do trabalho</h2>
-        <p>
-          Aos 23 anos, trago um percurso prático de entrega de produtos de ponta a ponta.
-          Desde fundar a Avenix em março de 2025 a lançar a LitCal na App Store, e implementar
-          ecossistemas de encomendas reais para restaurantes — conduzo o ciclo de vida do produto,
-          do sistema de design ao código em produção.
-        </p>
-        <p>
-          Sou especialista em traduzir problemas operacionais complexos em interfaces intuitivas.
-          Coordeno fluxos de design e desenvolvimento técnico, colaborando de perto com agências parceiras (como
-          a AspireVerse.uk) e stakeholders dos clientes para entregar produtos rápidos, seguros e escaláveis.
-        </p>
-        <p>
-          Sou fluente em <strong>Inglês</strong> e <strong>Português</strong>.
-          Disponível para recolocação internacional — e aberto a oportunidades
-          em regime remoto a nível global.
-        </p>
-        <div class="about-traits">
-          <span class="trait">⚡ Execução Rápida</span>
-          <span class="trait">🎯 Responsabilidade Total</span>
-          <span class="trait">🤝 Trabalho em Equipa</span>
-          <span class="trait">🌍 Disponibilidade global</span>
-          <span class="trait">🔧 Entrega Full-Stack</span>
-        </div>
-      </div>
-      <div class="about-stats ai">
-        <div class="stat-card card">
-          <div class="stat-num">200<span>+</span></div>
-          <div class="stat-label">Utilizadores ativos na LitCal (App Store)</div>
-        </div>
-        <div class="stat-card card">
-          <div class="stat-num">100<span>%</span></div>
-          <div class="stat-label">Taxa de entrega e implementação para clientes</div>
-        </div>
-        <div class="stat-card card">
-          <div class="stat-num">500<span>+</span></div>
-          <div class="stat-label">Utilizadores finais servidos em todos os produtos ativos</div>
-        </div>
-        <div class="avail-card">
-          <div class="avail-dot"></div>
-          <div class="avail-text">Aberto a novas oportunidades — Disponibilidade imediata</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════ PROJECTS ══════════════════════ -->
-<section class="section" id="projects">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-label">Trabalho Selecionado</div>
-      <h2 class="section-title">Projetos Reais</h2>
-      <p class="section-sub">Cada produto aqui está no ar, é utilizado por pessoas reais e foi construído com foco na excelência de design e engenharia.</p>
-    </div>
-    <div class="projects-grid">
-
-      <!-- LITCAL -->
-      <article class="card proj-card ai">
-        <div class="proj-visual" style="background:linear-gradient(135deg,#2563EB 0%,#1D4ED8 100%);">
-          <div style="width: 70px; height: 110px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); border-radius: 10px; padding: 6px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); backdrop-filter: blur(4px); display: flex; flex-direction: column; gap: 4px; transform: translateY(10px) rotate(-5deg); transition: transform 0.3s ease;">
-            <div style="width: 100%; height: 35px; background: rgba(255,255,255,0.15); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 14px;">🥗</div>
-            <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
-            <div style="width: 70%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
-            <div style="width: 100%; height: 28px; background: #10B981; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 7px; font-weight: 700; color: white;">240 kcal</div>
-          </div>
-          <button class="btn-interactive-trigger" data-url="https://www.litcal.app/" data-title="Website do LitCal" data-mode="mobile">⚡ Ver Demo</button>
-        </div>
-        <div class="proj-badges">
-          <span class="badge-live">No ar · App Store</span>
-          <span class="badge-type">Aplicação iOS</span>
-        </div>
-        <p class="proj-hook">"Aponte a câmara para uma refeição. Obtenha a informação nutricional em segundos."</p>
-        <h3 class="proj-title">LitCal</h3>
-        <p class="proj-desc">Aplicação de nutrição iOS com IA. Lançada a 21 de Maio de 2025, utiliza GPT-4 Vision para calcular macros e calorias instantaneamente a partir de fotos. Responsável pelo ciclo completo de produto, desde o UX research até à engenharia de código.</p>
-        <div class="proj-outcome">📈 Mais de 200 utilizadores ativos · Receita por subscrição</div>
-        <div class="proj-tags">
-          <span class="tag">React Native</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">GPT-4 Vision</span>
-          <span class="tag">Supabase</span>
-          <span class="tag">RevenueCat</span>
-          <span class="tag">iOS</span>
-        </div>
-        <a href="https://www.litcal.app/" class="proj-cta" target="_blank" rel="noopener">Ver Site Oficial →</a>
-      </article>
-
-      <!-- TERRA NOSTRA -->
-      <article class="card proj-card ai">
-        <div class="proj-visual" style="background:linear-gradient(135deg,#10B981 0%,#059669 100%);">
-          <!-- Tablet Dashboard Mock -->
-          <div style="width: 110px; height: 80px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 6px; display: flex; flex-direction: column; gap: 4px; transform: translateX(-15px) translateY(10px); box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="width: 25px; height: 5px; background: rgba(255,255,255,0.3); border-radius: 2px;"></div>
-              <div style="width: 8px; height: 8px; background: #10B981; border-radius: 50%;"></div>
-            </div>
-            <div style="display: flex; gap: 4px; flex: 1;">
-              <div style="width: 20px; background: rgba(255,255,255,0.1); border-radius: 2px;"></div>
-              <div style="flex: 1; background: rgba(255,255,255,0.15); border-radius: 2px; padding: 3px; display: flex; flex-direction: column; gap: 2px;">
-                <div style="width: 80%; height: 3px; background: rgba(255,255,255,0.3); border-radius: 1px;"></div>
-                <div style="width: 50%; height: 3px; background: rgba(255,255,255,0.3); border-radius: 1px;"></div>
-              </div>
-            </div>
-          </div>
-          <!-- Phone Menu Mock overlapping -->
-          <div style="width: 50px; height: 85px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; padding: 4px; backdrop-filter: blur(4px); position: absolute; transform: translateX(35px) translateY(15px) rotate(5deg); box-shadow: 0 10px 30px rgba(0,0,0,0.35); display: flex; flex-direction: column; gap: 4px;">
-            <div style="width: 100%; height: 20px; background: rgba(255,255,255,0.2); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 8px;">🍽️</div>
-            <div style="width: 80%; height: 4px; background: rgba(255,255,255,0.3); border-radius: 1px;"></div>
-            <div style="width: 100%; height: 38px; background: rgba(255,255,255,0.1); border-radius: 3px; display: flex; flex-direction: column; gap: 2px; padding: 2px;">
-              <div style="width: 100%; height: 10px; background: #3B82F6; border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 5px; color: white;">Order Now</div>
-            </div>
-          </div>
-          <button class="btn-interactive-trigger" data-url="https://www.terranostramenu.com/" data-title="Menu Digital Terra Nostra" data-mode="mobile">⚡ Ver Demo</button>
-        </div>
-        <div class="proj-badges">
-          <span class="badge-live">No ar</span>
-          <span class="badge-type">Full-Stack</span>
-        </div>
-        <p class="proj-hook">"Menu QR e ecossistema de encomendas para restauração local."</p>
-        <h3 class="proj-title">Terra Nostra — Sistema Digital para Restaurantes</h3>
-        <p class="proj-desc">Ecossistema completo de pedidos desenhado e implementado para o Terra Nostra sob a marca Avenix. Integra menus digitais em tempo real, canais de entrega e painel analítico para gestão de pedidos.</p>
-        <div class="proj-outcome">🏪 Operações ativas em restauração · Implementado ao vivo</div>
-        <div class="proj-tags">
-          <span class="tag">Full-Stack</span>
-          <span class="tag">Pedidos via QR</span>
-          <span class="tag">Next.js</span>
-          <span class="tag">Painel de Controlo</span>
-          <span class="tag">Interface Premium</span>
-        </div>
-        <a href="https://www.terranostramenu.com/" class="proj-cta" target="_blank" rel="noopener">Ver Menu Implementado →</a>
-      </article>
-
-      <!-- GAJAJADA -->
-      <article class="card proj-card ai">
-        <div class="proj-visual" style="background:linear-gradient(135deg,#F97316 0%,#EA580C 100%);">
-          <!-- Tablet Dashboard Mock with Warm Accent -->
-          <div style="width: 110px; height: 80px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 6px; display: flex; flex-direction: column; gap: 4px; transform: translateX(-15px) translateY(10px); box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="width: 25px; height: 5px; background: rgba(255,255,255,0.3); border-radius: 2px;"></div>
-              <div style="width: 8px; height: 8px; background: #F97316; border-radius: 50%;"></div>
-            </div>
-            <div style="display: flex; gap: 4px; flex: 1;">
-              <div style="width: 20px; background: rgba(255,255,255,0.1); border-radius: 2px;"></div>
-              <div style="flex: 1; background: rgba(255,255,255,0.15); border-radius: 2px; padding: 3px; display: flex; flex-direction: column; gap: 2px;">
-                <div style="width: 80%; height: 3px; background: rgba(255,255,255,0.3); border-radius: 1px;"></div>
-                <div style="width: 50%; height: 3px; background: rgba(255,255,255,0.3); border-radius: 1px;"></div>
-              </div>
-            </div>
-          </div>
-          <!-- Phone Menu Mock with Orange Juice cup emoji -->
-          <div style="width: 50px; height: 85px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; padding: 4px; backdrop-filter: blur(4px); position: absolute; transform: translateX(35px) translateY(15px) rotate(5deg); box-shadow: 0 10px 30px rgba(0,0,0,0.35); display: flex; flex-direction: column; gap: 4px;">
-            <div style="width: 100%; height: 20px; background: rgba(255,255,255,0.2); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 8px;">🍹</div>
-            <div style="width: 80%; height: 4px; background: rgba(255,255,255,0.3); border-radius: 1px;"></div>
-            <div style="width: 100%; height: 38px; background: rgba(255,255,255,0.1); border-radius: 3px; display: flex; flex-direction: column; gap: 2px; padding: 2px;">
-              <div style="width: 100%; height: 10px; background: #EA580C; border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 5px; color: white;">Order Now</div>
-            </div>
-          </div>
-          <button class="btn-interactive-trigger" data-url="https://gajajada.com/" data-title="Sistema de Pedidos Gajajada" data-mode="mobile">⚡ Ver Demo</button>
-        </div>
-        <div class="proj-badges">
-          <span class="badge-live">No ar</span>
-          <span class="badge-type">Full-Stack</span>
-        </div>
-        <p class="proj-hook">"E-commerce interativo e painel de gestão para marca premium de sumos naturais."</p>
-        <h3 class="proj-title">Gajajada — Sistema de Encomendas Digital</h3>
-        <p class="proj-desc">Sistema de encomendas personalizado construído e implementado para a marca de sumos premium Gajajada sob a Avenix. Possui interface rápida de checkout, rotinas de pedidos e gestão em tempo real no dashboard administrativo.</p>
-        <div class="proj-outcome">🏪 Operações ativas de negócio · Interface construída à medida</div>
-        <div class="proj-tags">
-          <span class="tag">Full-Stack</span>
-          <span class="tag">Pedidos via QR</span>
-          <span class="tag">Next.js</span>
-          <span class="tag">Painel Administrativo</span>
-          <span class="tag">UI/UX Avançado</span>
-        </div>
-        <a href="https://gajajada.com/" class="proj-cta" target="_blank" rel="noopener">Ver Menu Implementado →</a>
-      </article>
-
-      <!-- FACUL GROUP -->
-      <article class="card proj-card ai">
-        <div class="proj-visual" style="background:linear-gradient(135deg,#8B5CF6 0%,#6D28D9 100%);">
-          <div style="width: 140px; height: 95px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px 8px 0 0; padding: 6px; transform: translateY(20px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 6px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-              <div style="display: flex; gap: 3px;">
-                <div style="width: 4px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 50%;"></div>
-                <div style="width: 4px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 50%;"></div>
-                <div style="width: 4px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 50%;"></div>
-              </div>
-              <div style="width: 50px; height: 4px; background: rgba(255,255,255,0.15); border-radius: 2px;"></div>
-            </div>
-            <div style="width: 100%; height: 35px; background: rgba(255,255,255,0.1); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 14px;">🏢</div>
-            <div style="display: flex; gap: 4px;">
-              <div style="flex: 1; height: 16px; background: rgba(255,255,255,0.12); border-radius: 2px;"></div>
-              <div style="flex: 1; height: 16px; background: rgba(255,255,255,0.12); border-radius: 2px;"></div>
-              <div style="flex: 1; height: 16px; background: rgba(255,255,255,0.12); border-radius: 2px;"></div>
-            </div>
-          </div>
-          <button class="btn-interactive-trigger" data-url="https://grupofacul.com/" data-title="Website do Grupo Facul" data-mode="desktop">⚡ Ver Demo</button>
-        </div>
-        <div class="proj-badges">
-          <span class="badge-live">No ar · grupofacul.com</span>
-          <span class="badge-type">Web</span>
-        </div>
-        <p class="proj-hook">"Presença institucional profissional, desenhada para escalar."</p>
-        <h3 class="proj-title">Grupo Facul — Website Institucional</h3>
-        <p class="proj-desc">Site corporativo desenvolvido com interface moderna, arquitetura de conteúdo otimizada e SEO robusto. Desenvolvido em cooperação estratégica com a parceira AspireVerse.uk.</p>
-        <div class="proj-outcome">🌐 No ar em grupofacul.com · Otimizado para performance e pesquisa</div>
-        <div class="proj-tags">
-          <span class="tag">Web Development</span>
-          <span class="tag">UI/UX</span>
-          <span class="tag">SEO</span>
-          <span class="tag">Parceria Externa</span>
-        </div>
-        <a href="https://grupofacul.com/" class="proj-cta" target="_blank" rel="noopener">Ver Site ao Vivo →</a>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════ EXPERIENCE ════════════════════ -->
-<section class="section" id="experience">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-label">Percurso Profissional</div>
-      <h2 class="section-title">Onde Trabalhei</h2>
-      <p class="section-sub">Cada função moldou a forma como penso, vendo, construo e lidero.</p>
-    </div>
-    <div class="exp-list">
-
-      <!-- AVENIX -->
-      <div class="exp-item ai">
-        <div class="exp-dot"></div>
-        <div class="card exp-card">
-          <div class="exp-header">
-            <div>
-              <h3 class="exp-role">Fundador &amp; Diretor-Geral</h3>
-              <div class="exp-company">AVENIX</div>
-            </div>
-            <span class="exp-date">Mar 2025 – Presente</span>
-          </div>
-          <div class="exp-type">Luanda, Angola · Desenvolvimento de Software &amp; Automação de IA</div>
-          <ul class="exp-bullets">
-            <li>Fundei a Avenix para desenvolver produtos digitais, angariar clientes e liderar o desenvolvimento de software</li>
-            <li>Concebi e programei ecossistemas de encomendas para restaurantes: menus QR, painéis de clientes e dashboards analíticos de faturação</li>
-            <li>Responsável técnico por todas as entregas de clientes, definindo a arquitetura de software e gerindo implementações</li>
-            <li>Liderei de forma integrada a prospeção, estratégia de produto, design UI/UX, branding e operações</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- LITCAL -->
-      <div class="exp-item ai">
-        <div class="exp-dot"></div>
-        <div class="card exp-card">
-          <div class="exp-header">
-            <div>
-              <h3 class="exp-role">Criador &amp; Líder de Produto</h3>
-              <div class="exp-company">LITCAL <span style="color:var(--text-muted);font-style:normal;font-weight:400;font-size:13px;">(by Avenix)</span></div>
-            </div>
-            <span class="exp-date">2024 – Presente</span>
-          </div>
-          <div class="exp-type">Aplicação iOS · Monitorização Nutricional com IA · App Store</div>
-          <ul class="exp-bullets">
-            <li>Idealizei e lancei a LitCal — app iOS com IA que usa GPT-4 Vision para detalhamento instantâneo de calorias e macros a partir de fotos de refeições</li>
-            <li>Responsável pela liderança de ciclo de vida do produto: pesquisa de UX, design visual, desenvolvimento frontend, submissão na App Store e monetização</li>
-            <li>Geri a estratégia de crescimento, alcançando mais de <strong>200 utilizadores ativos</strong> via parcerias com influenciadores</li>
-            <li>Implementei o modelo de faturação recorrente e atualizações contínuas orientadas por métricas de utilização</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- FREELANCE -->
-      <div class="exp-item ai">
-        <div class="exp-dot"></div>
-        <div class="card exp-card">
-          <div class="exp-header">
-            <div>
-              <h3 class="exp-role">Programador Freelance</h3>
-              <div class="exp-company">Trabalho Independente</div>
-            </div>
-            <span class="exp-date">2024</span>
-          </div>
-          <ul class="exp-bullets">
-            <li>Desenvolvi aplicações web e fluxos de automação (n8n/Make) para clientes independentes</li>
-            <li>Desenhei interfaces responsivas e automatizei processos para resolver gargalos operacionais</li>
-            <li>Prestei suporte técnico contínuo e manutenção pós-lançamento</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- AMUSE -->
-      <div class="exp-item ai">
-        <div class="exp-dot"></div>
-        <div class="card exp-card">
-          <div class="exp-header">
-            <div>
-              <h3 class="exp-role">Assistente Comercial</h3>
-              <div class="exp-company">AMUSE — Mundial Seguros</div>
-            </div>
-            <span class="exp-date">2022 – 2023</span>
-          </div>
-          <ul class="exp-bullets">
-            <li>Atingi e superei consistentemente os objetivos de vendas mensais num ambiente competitivo de seguros</li>
-            <li>Criei um sistema de acompanhamento de clientes para otimizar a visibilidade do funil de vendas e a disciplina de follow-up</li>
-            <li>Identifiquei novas oportunidades de negócio através de análises de mercado estruturadas</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- CFG -->
-      <div class="exp-item ai">
-        <div class="exp-dot"></div>
-        <div class="card exp-card">
-          <div class="exp-header">
-            <div>
-              <h3 class="exp-role">Analista de Relatórios &amp; Tradutor</h3>
-              <div class="exp-company">CFG &amp; Triple Sports</div>
-            </div>
-            <span class="exp-date">2020 – 2022</span>
-          </div>
-          <ul class="exp-bullets">
-            <li>Produzi documentação técnica bilingue para parceiros internacionais (Português/Inglês)</li>
-            <li>Desenvolvi um glossário interno para padronizar a terminologia entre equipas globais</li>
-            <li>Facilitei a articulação operacional entre equipas locais e parceiros internacionais</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════ SKILLS ════════════════════════ -->
-<section class="section" id="skills" style="background:var(--bg-section);">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-label">Perfil Técnico</div>
-      <h2 class="section-title">Competências &amp; Ferramentas</h2>
-      <p class="section-sub">Movimento-me rapidamente na stack. Aprendo o que for necessário, quando for necessário.</p>
-    </div>
-    <div class="skills-layout">
-      <div>
-        <div class="skills-cats ai">
-          <div class="skill-cat">
-            <div class="skill-cat-name">Desenvolvimento de Software</div>
-            <div class="skill-items">React Native · TypeScript · JavaScript · React · Next.js · iOS &amp; Android · APIs REST · Supabase · PostgreSQL</div>
-          </div>
-          <div class="skill-cat">
-            <div class="skill-cat-name">IA &amp; Automação</div>
-            <div class="skill-items">API da OpenAI · GPT-4 Vision · API do Claude · n8n · Make · Agentes IA · Engenharia de Prompts · Automação de Workflows</div>
-          </div>
-          <div class="skill-cat">
-            <div class="skill-cat-name">Produto &amp; Design</div>
-            <div class="skill-items">Gestão de Produto · Design UX/UI · Figma · Identidade de Marca · Roadmapping · ASO (Otimização App Store) · Go-to-Market</div>
-          </div>
-          <div class="skill-cat">
-            <div class="skill-cat-name">Gestão &amp; Liderança</div>
-            <div class="skill-items">Criação de Empresas · Angariação de Clientes · Desenvolvimento de Negócios · Planeamento Estratégico · Negociação Comercial</div>
-          </div>
-        </div>
-        <div class="edu-section ai" style="margin-top:32px;">
-          <div class="section-label" style="margin-bottom:12px;">Formação Académica</div>
-          <div class="edu-deg">Licenciatura em Gestão, Administração e Mercadologia</div>
-          <div class="edu-inst">Universidade Óscar Ribas</div>
-          <div class="edu-meta">2023 – Presente · A frequentar o 2.º Ano</div>
-          <div class="edu-note">Gestão Estratégica · Análise de Dados · E-Commerce</div>
-        </div>
-      </div>
-      <div>
-        <div class="tools-section ai">
-          <div class="tools-title">Ferramentas &amp; Tecnologias</div>
-          <div class="tools-cloud">
-            <span class="tool-badge">Supabase</span>
-            <span class="tool-badge">OpenAI API</span>
-            <span class="tool-badge">Claude</span>
-            <span class="tool-badge">Claude Code</span>
-            <span class="tool-badge">n8n</span>
-            <span class="tool-badge">Make</span>
-            <span class="tool-badge">Expo</span>
-            <span class="tool-badge">Android Studio</span>
-            <span class="tool-badge">RevenueCat</span>
-            <span class="tool-badge">Mixpanel</span>
-            <span class="tool-badge">Resend</span>
-            <span class="tool-badge">Figma</span>
-            <span class="tool-badge">Canva</span>
-            <span class="tool-badge">Next.js</span>
-            <span class="tool-badge">Vercel</span>
-            <span class="tool-badge">GitHub</span>
-            <span class="tool-badge">EAS Build</span>
-            <span class="tool-badge">TestFlight</span>
-            <span class="tool-badge">App Store Connect</span>
-            <span class="tool-badge">Cursor</span>
-          </div>
-        </div>
-        <div class="ai" style="margin-top:32px;">
-          <div class="tools-title">Domínio de Idiomas</div>
-          <div class="lang-list">
-            <div class="lang-item">
-              <span class="lang-name">Português</span>
-              <span class="lang-level">Nativo</span>
-            </div>
-            <div class="lang-item">
-              <span class="lang-name">Inglês</span>
-              <span class="lang-level">Fluente</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════ CONTACT ═══════════════════════ -->
-<section class="section" id="contact">
-  <div class="section-inner">
-    <div class="contact-inner ai">
-      <div class="section-label" style="justify-content:center;display:flex;">Entrar em Contacto</div>
-      <h2 class="section-title" style="text-align:center;margin-bottom:16px;">Vamos construir algo juntos</h2>
-      <p class="section-sub" style="margin:0 auto;text-align:center;">
-        Estou aberto a propostas full-time, projetos freelance e conversas interessantes.
-        Se está a construir algo ambicioso, quero saber mais.
+      <p>
+        Desenvolvi e lancei a <strong>LitCal</strong>, uma app iOS de nutrição com IA, do
+        primeiro commit à App Store em 2 semanas — alcançando 200+ utilizadores ativos e
+        $1.000+ em receita no primeiro mês. Tenho domínio completo do stack: design de APIs
+        REST, mobile (React Native), web (Next.js), infraestrutura cloud (Supabase, Vercel)
+        e sistemas de IA (OpenAI, Claude).
       </p>
-      <div style="display:flex;justify-content:center;">
-        <a href="mailto:erickrodrigues781@gmail.com" class="contact-email">
-          📧 erickrodrigues781@gmail.com
-        </a>
+      <p>
+        Coordeno entrega técnica com estúdios parceiros — incluindo a AspireVerse (Reino Unido) —
+        e stakeholders de clientes para entregar software rápido, fiável e de produção.
+      </p>
+      <p>
+        Fluente em <strong>Inglês</strong> e <strong>Português</strong>. Disponível para
+        contratos de engenharia remotos a nível global.
+      </p>
+    </div>
+    <div class="stat-cards">
+      <div class="stat-card">
+        <div class="stat-num">11<span class="plus">+</span></div>
+        <div class="stat-label">Projetos de clientes entregues via Avenix</div>
       </div>
-      <div class="social-links">
-        <a href="tel:+244944345250" class="social-btn">📞 +244 944 345 250</a>
-        <a href="#" class="social-btn">💼 LinkedIn</a>
-        <a href="#" class="social-btn">🐙 GitHub</a>
+      <div class="stat-card">
+        <div class="stat-num">30<span class="plus">+</span></div>
+        <div class="stat-label">Deployments em produção geridos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">200<span class="plus">+</span></div>
+        <div class="stat-label">Utilizadores ativos na LitCal (App Store)</div>
+      </div>
+      <div class="stat-card open"><span class="dot"></span> Aberto a novas oportunidades — Disponível agora</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ─────────────────────────────────────────── -->
+<section id="projects">
+  <div class="section-eyebrow">TRABALHO SELECIONADO</div>
+  <h2 class="section-title">Projetos em produção</h2>
+  <p class="section-sub">Cada produto aqui está ativo, é usado por pessoas reais, e foi construído de ponta a ponta — design, engenharia e deployment.</p>
+
+  <div class="project-grid">
+    <div class="project-card">
+      <div class="project-thumb litcal">
+        <a href="https://www.litcal.app/" class="project-thumb-link" target="_blank" rel="noopener" aria-label="Abrir demo da LitCal">LitCal</a>
+        <a href="https://www.litcal.app/" class="demo-badge" target="_blank" rel="noopener"><span class="bolt">⚡</span> Demo Ativa</a>
+      </div>
+      <div class="project-body">
+        <div class="project-tags"><span class="tag live">Ativo · App Store</span><span class="tag">App iOS</span></div>
+        <div class="project-quote">"Aponte a câmara para uma refeição. Obtenha a informação nutricional em segundos."</div>
+        <div class="project-title">LitCal</div>
+        <div class="project-desc">App iOS de nutrição com IA usando GPT-4 Vision para calcular macros e calorias a partir de fotos. Lançada a solo do primeiro commit à App Store em 2 semanas.</div>
+        <div class="project-metric">200+ utilizadores ativos · $1.000+ em receita no primeiro mês · 1.000+ análises processadas</div>
+        <div class="project-stack">React Native · TypeScript · GPT-4 Vision · Supabase · RevenueCat</div>
+        <a href="https://www.litcal.app/" class="project-link" target="_blank" rel="noopener">Visitar Site Oficial →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb terra">
+        <a href="https://www.terranostramenu.com/" class="project-thumb-link" target="_blank" rel="noopener" aria-label="Abrir demo do Terra Nostra">Terra Nostra</a>
+        <a href="https://www.terranostramenu.com/" class="demo-badge" target="_blank" rel="noopener"><span class="bolt">⚡</span> Demo Ativa</a>
+      </div>
+      <div class="project-body">
+        <div class="project-tags"><span class="tag live">Ativo</span><span class="tag">Full-Stack</span></div>
+        <div class="project-quote">"Menu QR e ecossistema de pedidos para restauração local."</div>
+        <div class="project-title">Terra Nostra — Sistema Digital de Restaurante</div>
+        <div class="project-desc">Ecossistema de pedidos totalmente automatizado, implementado para o Terra Nostra sob a Avenix — pedidos via QR, rastreamento em tempo real, agentes WhatsApp com IA e dashboard com analytics de receita.</div>
+        <div class="project-metric">2.000+ pedidos semanais processados</div>
+        <div class="project-stack">Next.js · Full-Stack · Pedidos QR · Analytics em Tempo Real</div>
+        <a href="https://www.terranostramenu.com/" class="project-link" target="_blank" rel="noopener">Ver Menu Implementado →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb gaja">
+        <a href="https://gajajada.com/" class="project-thumb-link" target="_blank" rel="noopener" aria-label="Abrir demo da Gajajada">Gajajada</a>
+        <a href="https://gajajada.com/" class="demo-badge" target="_blank" rel="noopener"><span class="bolt">⚡</span> Demo Ativa</a>
+      </div>
+      <div class="project-body">
+        <div class="project-tags"><span class="tag live">Ativo</span><span class="tag">Full-Stack</span></div>
+        <div class="project-quote">"Painel de pedidos e administração para marca premium de sumos naturais."</div>
+        <div class="project-title">Gajajada — Sistema Digital de Pedidos</div>
+        <div class="project-desc">Ecossistema de pedidos personalizado, construído e implementado para a Gajajada sob a Avenix — pedidos via QR, rastreamento em tempo real e dashboard com analytics de receita.</div>
+        <div class="project-metric">5.000+ pedidos semanais processados</div>
+        <div class="project-stack">Next.js · Full-Stack · Pedidos QR · Analytics em Tempo Real</div>
+        <a href="https://gajajada.com/" class="project-link" target="_blank" rel="noopener">Ver Menu Implementado →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb facul">
+        <a href="https://grupofacul.com/" class="project-thumb-link" target="_blank" rel="noopener" aria-label="Abrir site ativo do Grupo Facul">Facul Group</a>
+        <a href="https://grupofacul.com/" class="demo-badge" target="_blank" rel="noopener"><span class="bolt">⚡</span> Demo Ativa</a>
+      </div>
+      <div class="project-body">
+        <div class="project-tags"><span class="tag live">Ativo</span><span class="tag">Web</span></div>
+        <div class="project-quote">"Presença institucional profissional, desenhada para escalar."</div>
+        <div class="project-title">Grupo Facul — Website Institucional</div>
+        <div class="project-desc">Website corporativo com interface moderna, arquitetura de conteúdo otimizada e fortes fundações de SEO. Desenvolvido em parceria com a AspireVerse.uk.</div>
+        <div class="project-metric">Ativo em produção</div>
+        <div class="project-stack">Next.js · Web Development · UI/UX · SEO</div>
+        <a href="https://grupofacul.com/" class="project-link" target="_blank" rel="noopener">Ver Site Ativo →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════ FOOTER ════════════════════════ -->
+<!-- ── EXPERIENCE ───────────────────────────────────────── -->
+<section id="experience">
+  <div class="section-eyebrow">HISTÓRICO PROFISSIONAL</div>
+  <h2 class="section-title">Onde já trabalhei</h2>
+  <p class="section-sub">Cada função moldou a forma como construo, entrego e lidero.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="job-card">
+        <div class="job-head">
+          <div>
+            <div class="job-title">Fundador &amp; Diretor-Geral</div>
+            <div class="job-company">AVENIX</div>
+            <div class="job-meta">Luanda, Angola · Desenvolvimento de Software &amp; Automação de IA</div>
+          </div>
+          <div class="job-date">Mar 2025 – Presente</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Fundei e escalei a Avenix de zero para 11+ projetos entregues, assumindo responsabilidade técnica total — da arquitetura à implementação e manutenção em produção — em cada cliente.</li>
+          <li>Arquitetei ecossistemas de restauração totalmente automatizados para o Terra Nostra e o Gajajada — processando 2.000+ e 5.000+ pedidos semanais respetivamente — substituindo o atendimento manual por pedidos via QR, rastreamento em tempo real, agentes WhatsApp com IA e dashboards com analytics de receita.</li>
+          <li>Defini arquiteturas full-stack e geri 30+ deployments em produção em sistemas web, mobile e automação — mantendo operações sem interrupções em todas as plataformas de clientes ativas.</li>
+          <li>Implementei controlo de versão (Git), testes iterativos e documentação técnica em 30+ deployments, coordenando entregas com a AspireVerse (venture studio do Reino Unido) para operações sem interrupções.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="job-card">
+        <div class="job-head">
+          <div>
+            <div class="job-title">Criador &amp; Líder de Produto</div>
+            <div class="job-company">LITCAL (by Avenix)</div>
+            <div class="job-meta">App iOS · Monitorização Nutricional com IA</div>
+          </div>
+          <div class="job-date">2024 – Presente</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Concebi e lancei a LitCal — uma app iOS de produção com GPT-4 Vision que entrega análise instantânea de macros e calorias a partir de fotos de refeições — do primeiro commit à App Store em 2 semanas.</li>
+          <li>Assumi o SDLC completo a solo — arquitetura UX, desenvolvimento full-stack (React Native, TypeScript, Supabase), pipeline CI/CD (EAS Build, TestFlight), submissão à App Store e monetização em dois mercados via RevenueCat e Multicaixa Express.</li>
+          <li>Alcancei 200+ utilizadores ativos e ultrapassei $1.000 em receita no primeiro mês através de 6 parcerias com influenciadores — sem qualquer investimento em publicidade paga.</li>
+          <li>Impulsionei mais de 1.000 análises com IA através de subscrição por escalões ($6,99/mês · $34,99/ano) via iOS e infraestrutura de pagamentos local (Multicaixa Express).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="job-card">
+        <div class="job-head">
+          <div>
+            <div class="job-title">Programador Freelance</div>
+            <div class="job-company">Trabalho Independente</div>
+            <div class="job-meta">Remoto</div>
+          </div>
+          <div class="job-date">2024</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Entreguei 13+ aplicações web e sistemas de automação com IA a uma base de 30+ clientes — incluindo agentes de IA para redes sociais e pipelines de CRM automatizados para gestores de negócio.</li>
+          <li>Concebi e implementei automações que eliminaram 5+ horas de trabalho manual semanal por cliente em gestão de leads, processamento de encomendas e comunicação com clientes.</li>
+          <li>Mantive responsabilidade técnica pós-lançamento em todos os projetos — iterando sobre sistemas em produção e sustentando relações de longo prazo que geraram uma carteira de 30+ clientes por referências.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="job-card">
+        <div class="job-head">
+          <div>
+            <div class="job-title">Assistente Comercial</div>
+            <div class="job-company">AMUSE — Mundial Seguros</div>
+          </div>
+          <div class="job-date">2022 – 2023</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Superei os objetivos de vendas mensais em 30% de forma consistente num mercado de seguros de alta competitividade.</li>
+          <li>Desenvolvi um sistema CRM proprietário com 100+ contactos ativos, encurtando ciclos de follow-up e contribuindo diretamente para a superação contínua das metas.</li>
+          <li>Identifiquei segmentos de clientes subaproveitados através de análise de mercado sistemática, convertendo novas categorias de prospect em contas ativas.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="job-card">
+        <div class="job-head">
+          <div>
+            <div class="job-title">Analista de Relatórios &amp; Tradutor</div>
+            <div class="job-company">CFG &amp; Triple Sports</div>
+          </div>
+          <div class="job-date">2020 – 2022</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Produzi 40+ relatórios técnicos bilingues (PT/EN) para parceiros internacionais ao longo de um projeto de 6 meses em múltiplos países.</li>
+          <li>Construí um glossário interno com 100+ termos que padronizou a comunicação entre equipas angolanas e internacionais.</li>
+          <li>Coordenei operacionalmente equipas angolanas e parceiros internacionais — traduzindo 40+ relatórios técnicos e construindo um glossário de 100+ termos que eliminou ambiguidades de comunicação transfronteiriça em todos os entregáveis.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ───────────────────────────────────────────── -->
+<section id="skills">
+  <div class="section-eyebrow">PERFIL TÉCNICO</div>
+  <h2 class="section-title">Competências &amp; ferramentas</h2>
+  <p class="section-sub">Domínio completo do stack, da interface à infraestrutura.</p>
+
+  <div class="skills-grid">
+    <div>
+      <div class="skill-cat">
+        <h4>Engenharia Core</h4>
+        <p>JavaScript · TypeScript · React Native · React · Next.js · Design de APIs REST · SQL · PostgreSQL · Git · Entrega Ágil · CI/CD (EAS Build, GitHub Actions) · Infraestrutura Cloud (Supabase, Vercel) · iOS &amp; Android · Testes &amp; QA</p>
+      </div>
+      <div class="skill-cat">
+        <h4>IA &amp; Sistemas Inteligentes</h4>
+        <p>API OpenAI · GPT-4 Vision · API Claude · Design de Agentes IA · Engenharia de Prompts · n8n · Make</p>
+      </div>
+      <div class="skill-cat">
+        <h4>Engenharia de Produto</h4>
+        <p>Arquitetura Full-Stack · Ownership do SDLC · Design UX/UI · Figma · Roadmapping · Deployment App Store · Monetização por Subscrição · Documentação Técnica · Revisão de Código</p>
+      </div>
+      <div class="skill-cat">
+        <h4>Gestão &amp; Liderança</h4>
+        <p>Criação de Empresas · Angariação de Clientes · Desenvolvimento de Negócios · Planeamento Estratégico · Negociação Comercial</p>
+      </div>
+    </div>
+    <div>
+      <h4 style="font-size:14.5px; font-weight:700; margin-bottom:14px;">FERRAMENTAS &amp; TECNOLOGIAS</h4>
+      <div class="tool-pills">
+        <span class="pill">Supabase</span><span class="pill">OpenAI API</span><span class="pill">Claude</span>
+        <span class="pill">n8n</span><span class="pill">Make</span><span class="pill">Expo</span>
+        <span class="pill">Android Studio</span><span class="pill">RevenueCat</span><span class="pill">Mixpanel</span>
+        <span class="pill">Resend</span><span class="pill">Figma</span><span class="pill">Next.js</span>
+        <span class="pill">Vercel</span><span class="pill">GitHub</span><span class="pill">EAS Build</span>
+        <span class="pill">TestFlight</span><span class="pill">App Store Connect</span>
+      </div>
+
+      <h4 style="font-size:14.5px; font-weight:700; margin:32px 0 4px;">DOMÍNIO DE IDIOMAS</h4>
+      <div class="lang-row"><span>Português</span><span class="lang-badge">Nativo</span></div>
+      <div class="lang-row"><span>Inglês</span><span class="lang-badge">Fluente</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ──────────────────────────────────────────── -->
+<section id="contact">
+  <div class="contact-box">
+    <h2>Vamos construir algo juntos</h2>
+    <p>Estou aberto a posições full-time, projetos freelance e contratos de engenharia remotos a nível global. Se estás a construir algo ambicioso, quero ouvir sobre isso.</p>
+    <div class="contact-links">
+      <a href="mailto:erickrodrigues781@gmail.com" class="contact-link">📧 erickrodrigues781@gmail.com</a>
+      <a href="tel:+244944345250" class="contact-link">📞 +244 944 345 250</a>
+      <a href="https://www.linkedin.com/in/erick-rodrigues-0ba092419" class="contact-link" target="_blank" rel="noopener">💼 LinkedIn</a>
+      <a href="https://github.com/Erickrodrigues05" class="contact-link" target="_blank" rel="noopener">🐙 GitHub</a>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <div>
-    <div class="footer-name">Erick Rodrigues</div>
-    <div class="footer-copy">© 2026 · Luanda, Angola · Todos os direitos reservados</div>
-  </div>
-  <a href="#hero" class="footer-top">↑ Voltar ao topo</a>
+  Erick Rodrigues · © 2026 · Luanda, Angola · Todos os direitos reservados<br>
+  <a href="#hero">↑ Voltar ao topo</a>
 </footer>
 
-<!-- ═══════════════════════════ PREVIEW MODAL ════════════════ -->
-<div class="preview-modal" id="preview-modal">
-  <div class="preview-window">
-    <div class="preview-header">
-      <div class="preview-dots">
-        <div class="preview-dot r"></div>
-        <div class="preview-dot y"></div>
-        <div class="preview-dot g"></div>
-      </div>
-      <div class="preview-address" id="preview-address">https://www.litcal.app/</div>
-      <div class="preview-actions">
-        <button class="preview-view-btn" id="preview-view-desktop" title="Visualização Desktop">💻 Desktop</button>
-        <button class="preview-view-btn" id="preview-view-mobile" title="Visualização Telemóvel">📱 Telemóvel</button>
-        <button class="preview-close" id="preview-close-btn" aria-label="Fechar Visualização">×</button>
-      </div>
-    </div>
-    <div class="preview-body">
-      <div class="preview-iframe-wrapper" id="preview-iframe-wrapper">
-        <!-- iframe dynamically injected here -->
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-(function() {
-
-  // ── Scroll animations ──────────────────────────────
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('vis');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
-  document.querySelectorAll('.ai').forEach(el => obs.observe(el));
-
-  // ── Nav scroll effect ──────────────────────────────
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  }, { passive: true });
-
-  // ── Smooth scroll ──────────────────────────────────
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-        document.getElementById('mobile-menu').classList.remove('open');
-      }
-    });
-  });
-
-  // ── Typewriter ─────────────────────────────────────
-  const roles = ['Desenvolvedor de Software', 'Criador de Produtos', 'Fundador & Maker', 'Entusiasta de IA'];
-  let ri = 0, ci = 0, deleting = false, paused = false;
-  const tw = document.querySelector('.typewriter');
-  if (tw) {
-    setInterval(() => {
-      if (paused) return;
-      const word = roles[ri];
-      if (!deleting) {
-        ci++;
-        tw.textContent = word.slice(0, ci);
-        if (ci === word.length) { deleting = true; paused = true; setTimeout(() => paused = false, 1800); }
-      } else {
-        ci--;
-        tw.textContent = word.slice(0, ci);
-        if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
-      }
-    }, deleting ? 45 : 85);
-  }
-
-  // ── Mobile nav ─────────────────────────────────────
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  hamburger?.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-
-  // ── Active nav link ────────────────────────────────
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  const sectionObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        navLinks.forEach(a => {
-          a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
-        });
-      }
-    });
-  }, { threshold: 0.4 });
-  sections.forEach(s => sectionObs.observe(s));
-
-  // ── Live Preview Modal Logic ────────────────────────
-  const modal = document.getElementById('preview-modal');
-  const iframeWrapper = document.getElementById('preview-iframe-wrapper');
-  const addressBar = document.getElementById('preview-address');
-  const closeBtn = document.getElementById('preview-close-btn');
-  const btnDesktop = document.getElementById('preview-view-desktop');
-  const btnMobile = document.getElementById('preview-view-mobile');
-  
-  let activeUrl = "";
-  
-  document.querySelectorAll('.btn-interactive-trigger').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      const url = btn.getAttribute('data-url');
-      const title = btn.getAttribute('data-title');
-      const mode = btn.getAttribute('data-mode');
-      
-      activeUrl = url;
-      addressBar.textContent = url;
-      
-      iframeWrapper.innerHTML = `<iframe src="${url}" class="preview-iframe" title="${title}" loading="lazy"></iframe>`;
-      setPreviewMode(mode);
-      
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-  
-  function setPreviewMode(mode) {
-    if (mode === 'mobile') {
-      iframeWrapper.classList.add('mobile');
-      btnMobile.classList.add('active');
-      btnDesktop.classList.remove('active');
-    } else {
-      iframeWrapper.classList.remove('mobile');
-      btnDesktop.classList.add('active');
-      btnMobile.classList.remove('active');
-    }
-  }
-  
-  btnDesktop.addEventListener('click', () => setPreviewMode('desktop'));
-  btnMobile.addEventListener('click', () => setPreviewMode('mobile'));
-  
-  function closeModal() {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-    setTimeout(() => {
-      iframeWrapper.innerHTML = '';
-    }, 300);
-  }
-  
-  closeBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
-  });
-
-})();
-</script>
 </body>
 </html>
