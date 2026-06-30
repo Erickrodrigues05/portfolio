@@ -222,6 +222,8 @@
   .project-thumb-link {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
+    background: none; border: none; color: inherit; cursor: pointer;
+    font-size: inherit; font-weight: inherit; font-family: inherit;
   }
   .demo-badge {
     position: absolute; top: 12px; right: 12px;
@@ -233,6 +235,7 @@
     font-size: 11.5px; font-weight: 600;
     padding: 6px 11px; border-radius: 999px;
     transition: background 0.2s, border-color 0.2s;
+    cursor: pointer; font-family: inherit;
   }
   .demo-badge:hover { background: rgba(10, 14, 26, 0.95); border-color: var(--blue-bright); }
   .demo-badge .bolt { color: #fbbf24; }
@@ -631,8 +634,8 @@
   <div class="project-grid">
     <div class="project-card">
       <div class="project-thumb litcal">
-        <a href="https://www.litcal.app/" class="project-thumb-link btn-interactive-trigger" data-url="https://www.litcal.app/" data-title="LitCal" data-mode="mobile" target="_blank" rel="noopener" aria-label="Open LitCal live demo">LitCal</a>
-        <a href="https://www.litcal.app/" class="demo-badge btn-interactive-trigger" data-url="https://www.litcal.app/" data-title="LitCal" data-mode="mobile" target="_blank" rel="noopener"><span class="bolt">⚡</span> Live Demo</a>
+        <button class="project-thumb-link btn-interactive-trigger" data-url="https://www.litcal.app/" data-title="LitCal" data-mode="mobile" aria-label="Open LitCal live demo">LitCal</button>
+        <button class="demo-badge btn-interactive-trigger" data-url="https://www.litcal.app/" data-title="LitCal" data-mode="mobile"><span class="bolt">⚡</span> Live Demo</button>
       </div>
       <div class="project-body">
         <div class="project-tags"><span class="tag live">Live · App Store</span><span class="tag">iOS App</span></div>
@@ -647,8 +650,8 @@
 
     <div class="project-card">
       <div class="project-thumb terra">
-        <a href="https://www.terranostramenu.com/" class="project-thumb-link btn-interactive-trigger" data-url="https://www.terranostramenu.com/" data-title="Terra Nostra" data-mode="desktop" target="_blank" rel="noopener" aria-label="Open Terra Nostra live demo">Terra Nostra</a>
-        <a href="https://www.terranostramenu.com/" class="demo-badge btn-interactive-trigger" data-url="https://www.terranostramenu.com/" data-title="Terra Nostra" data-mode="desktop" target="_blank" rel="noopener"><span class="bolt">⚡</span> Live Demo</a>
+        <button class="project-thumb-link btn-interactive-trigger" data-url="https://www.terranostramenu.com/" data-title="Terra Nostra" data-mode="desktop" aria-label="Open Terra Nostra live demo">Terra Nostra</button>
+        <button class="demo-badge btn-interactive-trigger" data-url="https://www.terranostramenu.com/" data-title="Terra Nostra" data-mode="desktop"><span class="bolt">⚡</span> Live Demo</button>
       </div>
       <div class="project-body">
         <div class="project-tags"><span class="tag live">Live</span><span class="tag">Full-Stack</span></div>
@@ -663,8 +666,8 @@
 
     <div class="project-card">
       <div class="project-thumb gaja">
-        <a href="https://gajajada.com/" class="project-thumb-link btn-interactive-trigger" data-url="https://gajajada.com/" data-title="Gajajada" data-mode="desktop" target="_blank" rel="noopener" aria-label="Open Gajajada live demo">Gajajada</a>
-        <a href="https://gajajada.com/" class="demo-badge btn-interactive-trigger" data-url="https://gajajada.com/" data-title="Gajajada" data-mode="desktop" target="_blank" rel="noopener"><span class="bolt">⚡</span> Live Demo</a>
+        <button class="project-thumb-link btn-interactive-trigger" data-url="https://gajajada.com/" data-title="Gajajada" data-mode="desktop" aria-label="Open Gajajada live demo">Gajajada</button>
+        <button class="demo-badge btn-interactive-trigger" data-url="https://gajajada.com/" data-title="Gajajada" data-mode="desktop"><span class="bolt">⚡</span> Live Demo</button>
       </div>
       <div class="project-body">
         <div class="project-tags"><span class="tag live">Live</span><span class="tag">Full-Stack</span></div>
@@ -679,8 +682,8 @@
 
     <div class="project-card">
       <div class="project-thumb facul">
-        <a href="https://grupofacul.com/" class="project-thumb-link btn-interactive-trigger" data-url="https://grupofacul.com/" data-title="Facul Group" data-mode="desktop" target="_blank" rel="noopener" aria-label="Open Facul Group live site">Facul Group</a>
-        <a href="https://grupofacul.com/" class="demo-badge btn-interactive-trigger" data-url="https://grupofacul.com/" data-title="Facul Group" data-mode="desktop" target="_blank" rel="noopener"><span class="bolt">⚡</span> Live Demo</a>
+        <button class="project-thumb-link btn-interactive-trigger" data-url="https://grupofacul.com/" data-title="Facul Group" data-mode="desktop" aria-label="Open Facul Group live site">Facul Group</button>
+        <button class="demo-badge btn-interactive-trigger" data-url="https://grupofacul.com/" data-title="Facul Group" data-mode="desktop"><span class="bolt">⚡</span> Live Demo</button>
       </div>
       <div class="project-body">
         <div class="project-tags"><span class="tag live">Live</span><span class="tag">Web</span></div>
