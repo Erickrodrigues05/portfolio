@@ -338,198 +338,155 @@
     .nav-links { display: none; }
   }
 
-  /* â”€â”€ LIVE PREVIEW MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  .preview-modal {
+     LIVE PREVIEW MODAL  — clean rewrite
+  ══════════════════════════════════════════════════════ */
+
+  /* Overlay */
+  #pm-overlay {
+    display: none;
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: rgba(7,11,18,0.92);
+    background: rgba(6,11,19,0.90);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    display: flex;
     align-items: center;
     justify-content: center;
     padding: 24px 16px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s ease;
   }
-  .preview-modal.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-  .preview-window {
+  #pm-overlay.active { display: flex; animation: pm-fade .25s ease; }
+  @keyframes pm-fade { from { opacity:0 } to { opacity:1 } }
+
+  /* Browser window */
+  #pm-window {
     width: 100%;
     max-width: 1160px;
-    height: calc(100vh - 80px);
-    max-height: 900px;
+    height: min(90vh, 860px);
     background: #0d1520;
-    border: 1px solid var(--navy-border);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 16px;
-    box-shadow: 0 40px 120px rgba(0,0,0,0.8);
+    box-shadow: 0 48px 120px rgba(0,0,0,0.9);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transform: scale(0.95) translateY(16px);
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: pm-up .3s cubic-bezier(.16,1,.3,1);
   }
-  .preview-modal.active .preview-window {
-    transform: scale(1) translateY(0);
+  @keyframes pm-up {
+    from { transform: scale(.96) translateY(16px); opacity:0 }
+    to   { transform: scale(1)   translateY(0);    opacity:1 }
   }
-  .preview-header {
+
+  /* Header bar */
+  #pm-header {
     flex-shrink: 0;
     height: 52px;
-    background: rgba(255,255,255,0.03);
-    border-bottom: 1px solid var(--navy-border);
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 0 16px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
-  .preview-dots { display: flex; gap: 7px; }
-  .preview-dot {
-    width: 12px; height: 12px;
-    border-radius: 50%;
-  }
-  .preview-dot.r { background: #FF5F57; }
-  .preview-dot.y { background: #FFBD2E; }
-  .preview-dot.g { background: #28C840; }
-  .preview-address {
-    flex: 1;
+  .pm-dots { display:flex; gap:7px; flex-shrink:0; }
+  .pm-dot  { width:12px; height:12px; border-radius:50%; }
+  .pm-dot.r { background:#FF5F57 }
+  .pm-dot.y { background:#FFBD2E }
+  .pm-dot.g { background:#28C840 }
+
+  #pm-address {
+    flex:1;
+    height:30px; line-height:30px;
     background: rgba(255,255,255,0.05);
-    border: 1px solid var(--navy-border);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 6px;
-    padding: 5px 14px;
-    font-family: monospace;
-    font-size: 12.5px;
-    color: var(--text-secondary);
-    text-align: center;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    max-width: 480px;
+    padding: 0 12px;
+    font-family: monospace; font-size:12px;
+    color: rgba(255,255,255,0.5);
+    max-width:480px;
+    overflow:hidden; white-space:nowrap; text-overflow:ellipsis;
   }
-  .preview-actions {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    flex-shrink: 0;
-  }
-  .preview-view-btn {
-    background: rgba(255,255,255,0.04);
+  .pm-actions { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+
+  .pm-view-btn {
+    display:flex; align-items:center; gap:5px;
+    background: rgba(255,255,255,0.05);
     border: 1px solid transparent;
-    color: var(--text-muted);
-    font-size: 12px;
-    font-weight: 600;
-    padding: 5px 11px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s;
+    color: rgba(255,255,255,0.5);
+    font-size:12px; font-weight:600;
+    padding: 5px 12px; border-radius:6px;
+    cursor:pointer; font-family:inherit;
+    transition: all .15s;
   }
-  .preview-view-btn:hover {
-    color: var(--text-primary);
-    background: rgba(255,255,255,0.08);
-  }
-  .preview-view-btn.active {
-    color: #fff;
-    background: var(--blue-accent);
-    border-color: var(--blue-accent);
-  }
-  .preview-close {
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    font-size: 22px;
-    line-height: 1;
-    padding: 4px 8px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .preview-close:hover { color: #ef4444; background: rgba(239,68,68,0.1); }
+  .pm-view-btn:hover { background:rgba(255,255,255,0.09); color:#fff; }
+  .pm-view-btn.active { background:var(--blue-accent); color:#fff; border-color:var(--blue-accent); }
 
-  /* The body is the key â€” position:relative so iframe fills it absolutely */
-  .preview-body {
-    flex: 1;
-    position: relative;
-    background: #060913;
-    overflow: hidden;
+  #pm-open-btn {
+    background:none;
+    border:1px solid rgba(255,255,255,0.1);
+    color:rgba(255,255,255,0.5); font-size:12px; font-weight:600;
+    padding:5px 10px; border-radius:6px;
+    cursor:pointer; font-family:inherit; text-decoration:none;
+    display:inline-flex; align-items:center;
+    transition: all .15s;
   }
-  /* Mobile frame shell */
-  .preview-body.mobile-mode {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #060913;
-  }
-  .preview-phone-shell {
-    display: none;
-    width: 375px;
-    height: 100%;
-    max-height: 720px;
-    border: 10px solid #1e293b;
-    border-radius: 36px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.6);
-    flex-shrink: 0;
-  }
-  .preview-body.mobile-mode .preview-phone-shell { display: block; }
-  /* The iframe always fills its parent absolutely */
-  .preview-iframe {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: #fff;
-    display: block;
-  }
-  /* In mobile mode the iframe is inside the phone shell */
-  .preview-phone-shell .preview-iframe {
-    border-radius: 0;
-  }
-  /* Blocked-site fallback banner */
-  .preview-blocked {
-    position: absolute;
-    inset: 0;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    text-align: center;
-    padding: 32px;
-    background: #0d1520;
-    z-index: 5;
-  }
-  .preview-blocked.show { display: flex; }
-  .preview-blocked-icon { font-size: 48px; }
-  .preview-blocked h3 { font-size: 18px; font-weight: 700; color: var(--text-primary); }
-  .preview-blocked p { font-size: 14px; color: var(--text-secondary); max-width: 36ch; }
-  .preview-blocked a {
-    display: inline-block;
-    background: var(--blue-accent);
-    color: #fff;
-    padding: 10px 24px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 14px;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-  .preview-blocked a:hover { background: var(--blue-bright); }
+  #pm-open-btn:hover { color:#fff; border-color:rgba(255,255,255,0.3); }
 
-  @media (max-width: 640px) {
-    .preview-modal { padding: 0; }
-    .preview-window { border-radius: 0; height: 100vh; max-height: 100vh; }
-    .preview-view-btn { display: none; }
-    .preview-phone-shell {
-      width: 100% !important;
-      height: 100% !important;
-      max-height: 100% !important;
-      border: none !important;
-      border-radius: 0 !important;
+  #pm-close-btn {
+    width:32px; height:32px;
+    display:flex; align-items:center; justify-content:center;
+    background:none; border:1px solid rgba(255,255,255,0.1);
+    color:rgba(255,255,255,0.5); font-size:20px; line-height:1;
+    border-radius:6px; cursor:pointer; font-family:inherit;
+    transition: all .15s;
+  }
+  #pm-close-btn:hover { background:#ef4444; color:#fff; border-color:#ef4444; }
+
+  /* Body — position:relative is the KEY for absolute iframe */
+  #pm-body {
+    flex:1;
+    position:relative;
+    background:#060912;
+    overflow:hidden;
+  }
+
+  /* Desktop mode: iframe fills the entire body */
+  .pm-iframe {
+    position:absolute;
+    inset:0;
+    width:100%; height:100%;
+    border:none; display:block;
+    background:#fff;
+  }
+
+  /* Mobile mode: body becomes flex, phone shell is centered */
+  #pm-body.mobile {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  #pm-phone-shell {
+    display:none;
+    width:375px;
+    height:min(720px, calc(100% - 16px));
+    position:relative;
+    border:10px solid #1e293b;
+    border-radius:36px;
+    overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.05);
+    flex-shrink:0;
+  }
+  #pm-body.mobile #pm-phone-shell { display:block; }
+  #pm-phone-shell .pm-iframe { border-radius:0; }
+
+  /* Mobile breakpoint */
+  @media (max-width:640px) {
+    #pm-overlay { padding:0; }
+    #pm-window  { height:100dvh; max-height:100dvh; border-radius:0; }
+    .pm-view-btn { display:none; }
+    #pm-phone-shell {
+      width:100% !important; height:100% !important;
+      border:none !important; border-radius:0 !important;
+      box-shadow:none !important;
     }
   }
 </style>
@@ -635,7 +592,7 @@
     <div class="project-card">
       <div class="project-thumb litcal">
         <button class="project-thumb-link btn-interactive-trigger" data-url="https://www.litcal.app/" data-title="LitCal" data-mode="mobile" aria-label="Open LitCal live demo">LitCal</button>
-        <a href="https://www.litcal.app/" class="demo-badge btn-interactive-trigger" data-url="https://www.litcal.app/" data-title="LitCal" data-mode="mobile" target="_blank" rel="noopener"><span class="bolt">âš¡</span> Live Demo</a>
+        <button class="demo-badge btn-interactive-trigger" data-url="https://www.litcal.app/" data-title="LitCal" data-mode="mobile"><span class="bolt">âš¡</span> Live Demo</button>
       </div>
       <div class="project-body">
         <div class="project-tags"><span class="tag live">Live Â· App Store</span><span class="tag">iOS App</span></div>
@@ -651,7 +608,7 @@
     <div class="project-card">
       <div class="project-thumb terra">
         <button class="project-thumb-link btn-interactive-trigger" data-url="https://www.terranostramenu.com/" data-title="Terra Nostra" data-mode="desktop" aria-label="Open Terra Nostra live demo">Terra Nostra</button>
-        <a href="https://www.terranostramenu.com/" class="demo-badge btn-interactive-trigger" data-url="https://www.terranostramenu.com/" data-title="Terra Nostra" data-mode="desktop" target="_blank" rel="noopener"><span class="bolt">âš¡</span> Live Demo</a>
+        <button class="demo-badge btn-interactive-trigger" data-url="https://www.terranostramenu.com/" data-title="Terra Nostra" data-mode="desktop"><span class="bolt">âš¡</span> Live Demo</button>
       </div>
       <div class="project-body">
         <div class="project-tags"><span class="tag live">Live</span><span class="tag">Full-Stack</span></div>
@@ -667,7 +624,7 @@
     <div class="project-card">
       <div class="project-thumb gaja">
         <button class="project-thumb-link btn-interactive-trigger" data-url="https://gajajada.com/" data-title="Gajajada" data-mode="desktop" aria-label="Open Gajajada live demo">Gajajada</button>
-        <a href="https://gajajada.com/" class="demo-badge btn-interactive-trigger" data-url="https://gajajada.com/" data-title="Gajajada" data-mode="desktop" target="_blank" rel="noopener"><span class="bolt">âš¡</span> Live Demo</a>
+        <button class="demo-badge btn-interactive-trigger" data-url="https://gajajada.com/" data-title="Gajajada" data-mode="desktop"><span class="bolt">âš¡</span> Live Demo</button>
       </div>
       <div class="project-body">
         <div class="project-tags"><span class="tag live">Live</span><span class="tag">Full-Stack</span></div>
@@ -683,7 +640,7 @@
     <div class="project-card">
       <div class="project-thumb facul">
         <button class="project-thumb-link btn-interactive-trigger" data-url="https://grupofacul.com/" data-title="Facul Group" data-mode="desktop" aria-label="Open Facul Group live site">Facul Group</button>
-        <a href="https://grupofacul.com/" class="demo-badge btn-interactive-trigger" data-url="https://grupofacul.com/" data-title="Facul Group" data-mode="desktop" target="_blank" rel="noopener"><span class="bolt">âš¡</span> Live Demo</a>
+        <button class="demo-badge btn-interactive-trigger" data-url="https://grupofacul.com/" data-title="Facul Group" data-mode="desktop"><span class="bolt">âš¡</span> Live Demo</button>
       </div>
       <div class="project-body">
         <div class="project-tags"><span class="tag live">Live</span><span class="tag">Web</span></div>
@@ -859,181 +816,143 @@
   <a href="#hero">â†‘ Back to top</a>
 </footer>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â• LIVE PREVIEW MODAL â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-<div class="preview-modal" id="preview-modal">
-  <div class="preview-window">
-    <div class="preview-header">
-      <div class="preview-dots">
-        <div class="preview-dot r"></div>
-        <div class="preview-dot y"></div>
-        <div class="preview-dot g"></div>
+<!-- ═══════════════ LIVE PREVIEW MODAL ═══════════════ -->
+<div id="pm-overlay">
+  <div id="pm-window">
+    <div id="pm-header">
+      <div class="pm-dots">
+        <span class="pm-dot r"></span>
+        <span class="pm-dot y"></span>
+        <span class="pm-dot g"></span>
       </div>
-      <div class="preview-address" id="preview-address"></div>
-      <div class="preview-actions">
-        <button class="preview-view-btn active" id="preview-view-desktop">ðŸ’» Desktop</button>
-        <button class="preview-view-btn" id="preview-view-mobile">ðŸ“± Mobile</button>
-        <button class="preview-close" id="preview-close-btn" aria-label="Close">Ã—</button>
+      <div id="pm-address"></div>
+      <div class="pm-actions">
+        <button class="pm-view-btn active" id="pm-desktop-btn">💻 Desktop</button>
+        <button class="pm-view-btn"        id="pm-mobile-btn" >📱 Mobile</button>
+        <a href="#" target="_blank" rel="noopener" id="pm-open-btn">↗ Open</a>
+        <button id="pm-close-btn">×</button>
       </div>
     </div>
-    <!-- preview-body: position:relative so iframe fills it absolutely -->
-    <div class="preview-body" id="preview-body">
-      <!-- Desktop: iframe sits directly in preview-body -->
-      <!-- Mobile: iframe sits inside phone shell -->
-      <div class="preview-phone-shell" id="preview-phone-shell">
-        <!-- iframe injected here in mobile mode -->
-      </div>
-      <!-- Blocked-site fallback -->
-      <div class="preview-blocked" id="preview-blocked">
-        <div class="preview-blocked-icon">ðŸ”’</div>
-        <h3>Preview blocked by this site</h3>
-        <p>This site's security policy prevents it from being embedded. Open it directly instead.</p>
-        <a href="#" id="preview-blocked-link" target="_blank" rel="noopener">Open in New Tab â†’</a>
-      </div>
+    <div id="pm-body">
+      <div id="pm-phone-shell"></div>
     </div>
   </div>
 </div>
 
 <script>
-(function () {
-  'use strict';
+(function() {
 
-  // â”€â”€ Scroll-in animations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => {
+  /* ── scroll animations ── */
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(en) {
       if (en.isIntersecting) { en.target.classList.add('vis'); io.unobserve(en.target); }
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
-  document.querySelectorAll('.ai').forEach(el => io.observe(el));
+  document.querySelectorAll('.ai').forEach(function(el) { io.observe(el); });
 
-  // â”€â”€ Smooth scroll â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', ev => {
-      const t = document.querySelector(a.getAttribute('href'));
-      if (t) { ev.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  /* ── smooth scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
     });
   });
 
-  // â”€â”€ Live Preview Modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  const modal        = document.getElementById('preview-modal');
-  const body         = document.getElementById('preview-body');
-  const phoneShell   = document.getElementById('preview-phone-shell');
-  const addressBar   = document.getElementById('preview-address');
-  const blockedBox   = document.getElementById('preview-blocked');
-  const blockedLink  = document.getElementById('preview-blocked-link');
-  const btnClose     = document.getElementById('preview-close-btn');
-  const btnDesktop   = document.getElementById('preview-view-desktop');
-  const btnMobile    = document.getElementById('preview-view-mobile');
+  /* ── modal elements ── */
+  var overlay    = document.getElementById('pm-overlay');
+  var pmBody     = document.getElementById('pm-body');
+  var phoneShell = document.getElementById('pm-phone-shell');
+  var addrBar    = document.getElementById('pm-address');
+  var openBtn    = document.getElementById('pm-open-btn');
+  var closeBtn   = document.getElementById('pm-close-btn');
+  var deskBtn    = document.getElementById('pm-desktop-btn');
+  var mobBtn     = document.getElementById('pm-mobile-btn');
+  var curIframe  = null;
 
-  let currentIframe = null;
-  let currentUrl    = '';
-
-  // Build the iframe element
-  function makeIframe(url, title) {
-    const f = document.createElement('iframe');
-    f.src             = url;
-    f.title           = title || url;
-    f.className       = 'preview-iframe';
+  function mkIframe(url, title) {
+    var f = document.createElement('iframe');
+    f.src   = url;
+    f.title = title || '';
+    f.className = 'pm-iframe';
     f.setAttribute('loading', 'lazy');
-    f.setAttribute('allow', 'fullscreen');
-    // Detect X-Frame block via load timeout
-    let loaded = false;
-    f.addEventListener('load', () => { loaded = true; blockedBox.classList.remove('show'); });
-    setTimeout(() => {
-      if (!loaded) {
-        blockedBox.classList.add('show');
-        blockedLink.href = url;
-      }
-    }, 6000);
+    f.setAttribute('allowfullscreen', '');
     return f;
   }
 
-  // Switch between desktop / mobile layout
   function setMode(mode) {
+    if (!curIframe) return;
     if (mode === 'mobile') {
-      body.classList.add('mobile-mode');
-      btnMobile.classList.add('active');
-      btnDesktop.classList.remove('active');
-      // Move iframe into phone shell if it exists at top level
-      if (currentIframe && body.contains(currentIframe)) {
-        body.removeChild(currentIframe);
-        phoneShell.appendChild(currentIframe);
+      pmBody.classList.add('mobile');
+      mobBtn.classList.add('active'); deskBtn.classList.remove('active');
+      if (pmBody.contains(curIframe) && !phoneShell.contains(curIframe)) {
+        curIframe.remove(); phoneShell.appendChild(curIframe);
       }
     } else {
-      body.classList.remove('mobile-mode');
-      btnDesktop.classList.add('active');
-      btnMobile.classList.remove('active');
-      // Move iframe back to body if it's in shell
-      if (currentIframe && phoneShell.contains(currentIframe)) {
-        phoneShell.removeChild(currentIframe);
-        body.insertBefore(currentIframe, blockedBox);
+      pmBody.classList.remove('mobile');
+      deskBtn.classList.add('active'); mobBtn.classList.remove('active');
+      if (phoneShell.contains(curIframe)) {
+        curIframe.remove(); pmBody.insertBefore(curIframe, phoneShell);
       }
     }
   }
 
-  // Open the modal
-  function openPreview(url, title, mode) {
-    currentUrl = url;
-    addressBar.textContent = url;
-    blockedBox.classList.remove('show');
-    blockedLink.href = url;
+  function openModal(url, title, mode) {
+    /* clean up */
+    if (curIframe) { curIframe.remove(); curIframe = null; }
+    phoneShell.innerHTML = '';
+    pmBody.classList.remove('mobile');
+    deskBtn.classList.add('active'); mobBtn.classList.remove('active');
 
-    // Create fresh iframe
-    currentIframe = makeIframe(url, title);
+    /* address + open link */
+    addrBar.textContent = url;
+    openBtn.href = url;
 
-    // Place iframe according to mode
+    /* create iframe */
+    curIframe = mkIframe(url, title);
+
     if (mode === 'mobile') {
-      body.classList.add('mobile-mode');
-      btnMobile.classList.add('active');
-      btnDesktop.classList.remove('active');
-      phoneShell.innerHTML = '';
-      phoneShell.appendChild(currentIframe);
+      pmBody.classList.add('mobile');
+      mobBtn.classList.add('active'); deskBtn.classList.remove('active');
+      phoneShell.appendChild(curIframe);
     } else {
-      body.classList.remove('mobile-mode');
-      btnDesktop.classList.add('active');
-      btnMobile.classList.remove('active');
-      // Insert before blocked overlay so it stays under it
-      body.insertBefore(currentIframe, blockedBox);
+      pmBody.insertBefore(curIframe, phoneShell);
     }
 
-    modal.classList.add('active');
+    overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 
-  // Close the modal
   function closeModal() {
-    modal.classList.remove('active');
+    overlay.classList.remove('active');
     document.body.style.overflow = '';
-    blockedBox.classList.remove('show');
-    setTimeout(() => {
-      if (currentIframe) {
-        currentIframe.src = 'about:blank';
-        currentIframe.remove();
-        currentIframe = null;
-      }
+    setTimeout(function() {
+      if (curIframe) { curIframe.remove(); curIframe = null; }
       phoneShell.innerHTML = '';
-    }, 300);
+      pmBody.classList.remove('mobile');
+    }, 260);
   }
 
-  // Wire up all trigger buttons
-  document.querySelectorAll('.btn-interactive-trigger').forEach(btn => {
-    btn.addEventListener('click', ev => {
-      ev.preventDefault();
-      ev.stopPropagation();
-      openPreview(
-        btn.dataset.url,
-        btn.dataset.title,
-        btn.dataset.mode || 'desktop'
+  /* ── wire triggers ── */
+  document.querySelectorAll('.btn-interactive-trigger').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openModal(
+        btn.getAttribute('data-url'),
+        btn.getAttribute('data-title'),
+        btn.getAttribute('data-mode') || 'desktop'
       );
     });
   });
 
-  btnDesktop.addEventListener('click', () => setMode('desktop'));
-  btnMobile.addEventListener('click',  () => setMode('mobile'));
-  btnClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', ev => { if (ev.target === modal) closeModal(); });
-  document.addEventListener('keydown', ev => {
-    if (ev.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  deskBtn.addEventListener('click', function() { setMode('desktop'); });
+  mobBtn.addEventListener('click',  function() { setMode('mobile'); });
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
   });
+
 }());
 </script>
 </body>
