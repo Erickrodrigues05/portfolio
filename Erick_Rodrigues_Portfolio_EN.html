@@ -331,13 +331,456 @@
   footer a { color: var(--text-muted); margin-top: 8px; display: inline-block; }
   footer a:hover { color: var(--blue-bright); }
 
-  @media (max-width: 860px) {
-    .hero { grid-template-columns: 1fr; padding-top: 64px; text-align: left; }
-    .hero-photo-wrap { justify-self: start; }
-    .hero h1 { font-size: 40px; }
-    .about-grid, .skills-grid { grid-template-columns: 1fr; gap: 32px; }
     .project-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
+  }
+
+  /* ── INTERACTIVE DEMO MODAL ────────────────────────── */
+  .demo-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(4, 6, 12, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .demo-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .demo-modal-window {
+    width: 95%;
+    max-width: 1200px;
+    height: 90vh;
+    background: #0d1222;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s ease, height 0.3s ease;
+  }
+  .demo-modal-overlay.active .demo-modal-window {
+    transform: scale(1);
+  }
+  .demo-modal-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    background: rgba(17, 22, 37, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(8px);
+  }
+  .demo-modal-title {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .demo-modal-title span {
+    font-size: 11px;
+    padding: 2px 8px;
+    background: rgba(77, 138, 255, 0.15);
+    color: var(--blue-bright);
+    border-radius: 99px;
+    border: 1px solid rgba(77, 138, 255, 0.2);
+  }
+  .demo-controls-center {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 4px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  .demo-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+  }
+  .demo-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .demo-btn.active {
+    color: #fff;
+    background: var(--blue-accent);
+    box-shadow: 0 4px 12px rgba(77, 138, 255, 0.25);
+  }
+  .demo-controls-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .demo-icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 16px;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+  .demo-icon-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  .demo-icon-btn.close-btn:hover {
+    background: #ef4444;
+    color: #fff;
+    border-color: #ef4444;
+  }
+
+  .demo-iframe-container {
+    flex: 1;
+    background: #060913;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: auto;
+    padding: 24px;
+  }
+  .demo-iframe-wrapper {
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    background: #0a0e1a;
+  }
+  
+  /* Iframe sizes & frames */
+  .demo-iframe-wrapper.desktop {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+  }
+  .demo-iframe-wrapper.tablet {
+    width: 768px;
+    height: 1024px;
+    max-height: 100%;
+    border: 12px solid #1e293b;
+    border-radius: 28px;
+  }
+  .demo-iframe-wrapper.tablet.landscape {
+    width: 1024px;
+    height: 768px;
+    max-width: 100%;
+  }
+  .demo-iframe-wrapper.mobile {
+    width: 375px;
+    height: 812px;
+    max-height: 100%;
+    border: 12px solid #1e293b;
+    border-radius: 40px;
+    overflow: hidden;
+  }
+  .demo-iframe-wrapper.mobile.landscape {
+    width: 812px;
+    height: 375px;
+    max-width: 100%;
+  }
+
+  /* Mock notch for mobile */
+  .demo-iframe-wrapper.mobile::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 24px;
+    background: #1e293b;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    z-index: 20;
+    transition: opacity 0.2s;
+  }
+  .demo-iframe-wrapper.mobile.landscape::after {
+    display: none;
+  }
+
+  .demo-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+  }
+  
+  /* Loader & Error handler */
+  .demo-loader {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 5;
+    transition: opacity 0.3s;
+  }
+  .demo-spinner {
+    width: 36px; height: 36px;
+    border: 3px solid rgba(77, 138, 255, 0.1);
+    border-top-color: var(--blue-accent);
+    border-radius: 50%;
+    animation: demo-spin 0.8s linear infinite;
+  }
+  @keyframes demo-spin { to { transform: rotate(360deg); } }
+
+  .demo-error-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #0d1222;
+    z-index: 10;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    text-align: center;
+  }
+  .demo-error-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+  .demo-error-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    max-width: 40ch;
+    margin-bottom: 24px;
+  }
+
+  /* ── LITCAL SIMULATOR ───────────────────────────────── */
+  .litcal-simulator-screen {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #090d16;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 15;
+  }
+  .sim-phone-header {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+    background: #090d16;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .sim-app-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  .sim-app-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .sim-app-subtitle {
+    font-size: 13px;
+    color: #8a93a6;
+    margin-bottom: 24px;
+  }
+  .sim-upload-zone {
+    border: 2px dashed rgba(77, 138, 255, 0.3);
+    background: rgba(77, 138, 255, 0.03);
+    border-radius: 16px;
+    padding: 32px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 24px;
+  }
+  .sim-upload-zone:hover {
+    border-color: var(--blue-accent);
+    background: rgba(77, 138, 255, 0.06);
+  }
+  .sim-upload-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+  .sim-upload-text {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .sim-upload-subtext {
+    font-size: 11px;
+    color: #6e7891;
+  }
+  .sim-presets-title {
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6e7891;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .sim-presets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .sim-preset-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .sim-preset-card:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+  .sim-preset-img {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+  .sim-preset-label {
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+  .sim-analysis-loading {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+  }
+  .sim-analysis-results {
+    display: none;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 20px;
+    animation: sim-slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes sim-slide-up {
+    from { transform: translateY(16px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .sim-result-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .sim-result-icon {
+    font-size: 28px;
+    background: rgba(77, 138, 255, 0.1);
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sim-result-title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .sim-result-calories {
+    font-size: 12.5px;
+    color: #34d399;
+    font-weight: 600;
+  }
+  .sim-macros-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .sim-macro-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+  .sim-macro-val {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--blue-bright);
+  }
+  .sim-macro-lbl {
+    font-size: 10px;
+    color: #6e7891;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .sim-breakdown-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #8a93a6;
+    margin-bottom: 8px;
+  }
+  .sim-breakdown-text {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #aab2c8;
+  }
+  .sim-reset-btn {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 16px;
+  }
+  .sim-reset-btn:hover {
+    background: rgba(255,255,255,0.1);
   }
 </style>
 </head>
@@ -666,5 +1109,315 @@
   <a href="#hero">↑ Back to top</a>
 </footer>
 
+<!-- ── INTERACTIVE DEMO MODAL HTML ────────────────────── -->
+<div class="demo-modal-overlay" id="demoModal">
+  <div class="demo-modal-window" id="demoWindow">
+    <div class="demo-modal-bar">
+      <div class="demo-modal-title" id="demoTitle">
+        Project Demo <span>Active</span>
+      </div>
+      
+      <div class="demo-controls-center" id="demoControls">
+        <button class="demo-btn active" data-size="desktop">🖥️ Desktop</button>
+        <button class="demo-btn" data-size="tablet">💻 Tablet</button>
+        <button class="demo-btn" data-size="mobile">📱 Mobile</button>
+        <button class="demo-btn" id="demoRotate" style="display: none;">🔄 Rotate</button>
+      </div>
+
+      <div class="demo-controls-right">
+        <button class="demo-icon-btn" id="demoOpenNew" title="Open in new tab" aria-label="Open in new tab">🔗</button>
+        <button class="demo-icon-btn close-btn" id="demoClose" title="Close" aria-label="Close">✕</button>
+      </div>
+    </div>
+
+    <div class="demo-iframe-container">
+      <!-- Loader -->
+      <div class="demo-loader" id="demoLoader">
+        <div class="demo-spinner"></div>
+        <span>Connecting to secure server...</span>
+      </div>
+
+      <!-- Error display -->
+      <div class="demo-error-overlay" id="demoError">
+        <div class="demo-error-title">Unable to Embed Directly</div>
+        <div class="demo-error-desc">To protect your security, this client's server blocks embedded previews. You can interact with it directly in a new window.</div>
+        <a href="#" target="_blank" rel="noopener" class="btn-primary" id="demoErrorLink">Open in New Tab</a>
+      </div>
+
+      <!-- Custom LitCal iOS Simulator -->
+      <div class="litcal-simulator-screen" id="litcalSim">
+        <div class="sim-phone-header">
+          <span>9:41 📱</span>
+          <span>LitCal App</span>
+          <span>100% 🔋</span>
+        </div>
+        <div class="sim-app-body">
+          <div id="simMainView">
+            <h3 class="sim-app-title">LitCal AI</h3>
+            <p class="sim-app-subtitle">Select a meal photo to calculate macro nutrients</p>
+            
+            <div class="sim-upload-zone" id="simUploadZone">
+              <div class="sim-upload-icon">📸</div>
+              <div class="sim-upload-text">Upload Meal Photo</div>
+              <div class="sim-upload-subtext">Supports JPG, PNG, WEBP</div>
+            </div>
+
+            <div class="sim-presets-title">Quick Presets</div>
+            <div class="sim-presets-grid">
+              <div class="sim-preset-card" data-meal="pizza">
+                <div class="sim-preset-img">🍕</div>
+                <div class="sim-preset-label">Pizza Slice</div>
+              </div>
+              <div class="sim-preset-card" data-meal="salad">
+                <div class="sim-preset-img">🥗</div>
+                <div class="sim-preset-label">Greek Salad</div>
+              </div>
+              <div class="sim-preset-card" data-meal="burger">
+                <div class="sim-preset-img">🍔</div>
+                <div class="sim-preset-label">Beef Burger</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loading state -->
+          <div class="sim-analysis-loading" id="simLoading">
+            <div class="demo-spinner" style="margin-bottom: 16px;"></div>
+            <div style="font-weight: 700; margin-bottom: 4px;">Analyzing image...</div>
+            <div style="font-size: 12px; color: #6e7891;">GPT-4 Vision calculating calories</div>
+          </div>
+
+          <!-- Results state -->
+          <div class="sim-analysis-results" id="simResults">
+            <div class="sim-result-header">
+              <div class="sim-result-icon" id="simResultIcon">🍕</div>
+              <div>
+                <div class="sim-result-title" id="simResultName">Pizza Slice</div>
+                <div class="sim-result-calories" id="simResultCals">290 kcal</div>
+              </div>
+            </div>
+            
+            <div class="sim-macros-grid">
+              <div class="sim-macro-card">
+                <div class="sim-macro-val" id="simProtein">12g</div>
+                <div class="sim-macro-lbl">Protein</div>
+              </div>
+              <div class="sim-macro-card">
+                <div class="sim-macro-val" id="simCarbs">32g</div>
+                <div class="sim-macro-lbl">Carbs</div>
+              </div>
+              <div class="sim-macro-card">
+                <div class="sim-macro-val" id="simFat">11g</div>
+                <div class="sim-macro-lbl">Fats</div>
+              </div>
+            </div>
+
+            <div class="sim-breakdown-title">AI Nutritional Insights</div>
+            <div class="sim-breakdown-text" id="simBreakdown">
+              Analysis shows a single slice of pepperoni pizza. High in carbohydrates and fats. Consider balancing with vegetables.
+            </div>
+
+            <button class="sim-reset-btn" id="simReset">Scan Another Meal</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Iframe Wrapper -->
+      <div class="demo-iframe-wrapper desktop" id="demoWrapper">
+        <iframe class="demo-iframe" id="demoIframe" src="about:blank" title="Project Demo"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('demoModal');
+  const modalWindow = document.getElementById('demoWindow');
+  const iframe = document.getElementById('demoIframe');
+  const iframeWrapper = document.getElementById('demoWrapper');
+  const loader = document.getElementById('demoLoader');
+  const errorOverlay = document.getElementById('demoError');
+  const errorLink = document.getElementById('demoErrorLink');
+  
+  const titleEl = document.getElementById('demoTitle');
+  const closeBtn = document.getElementById('demoClose');
+  const openNewBtn = document.getElementById('demoOpenNew');
+  const rotateBtn = document.getElementById('demoRotate');
+  
+  // LitCal Simulator Elements
+  const litcalSim = document.getElementById('litcalSim');
+  const simMainView = document.getElementById('simMainView');
+  const simLoading = document.getElementById('simLoading');
+  const simResults = document.getElementById('simResults');
+  const simUpload = document.getElementById('simUploadZone');
+  const simReset = document.getElementById('simReset');
+  
+  let currentUrl = '';
+  let activeProject = '';
+  
+  const presets = {
+    pizza: { name: 'Pepperoni Pizza', cals: '290 kcal', p: '12g', c: '32g', f: '12g', icon: '🍕', text: 'Classic single slice of pepperoni pizza. Modest protein source, but high in refined carbohydrates and saturated fat. Recommend pairing with high-fiber side dishes to slow insulin spike.' },
+    salad: { name: 'Greek Salad', cals: '180 kcal', p: '4g', c: '8g', f: '15g', icon: '🥗', text: 'Loaded with cucumber, olives, feta cheese, and olive oil dressing. High in micronutrients and healthy monounsaturated fats. Excellent option for low-carb nutrition.' },
+    burger: { name: 'Cheeseburger', cals: '540 kcal', p: '28g', c: '40g', f: '26g', icon: '🍔', text: 'Flame-broiled beef patty with melted cheese on toasted sesame bun. High protein density. Note the elevated levels of sodium and saturated fat.' }
+  };
+
+  // Convert normal links to triggers
+  document.querySelectorAll('.demo-badge, .project-thumb-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const card = link.closest('.project-card');
+      const title = card.querySelector('.project-title').textContent;
+      const url = link.getAttribute('href');
+      activeProject = title.toLowerCase();
+
+      openDemo(url, title);
+    });
+  });
+
+  function openDemo(url, title) {
+    currentUrl = url;
+    titleEl.innerHTML = `${title} <span>Demo</span>`;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Reset wrapper to desktop mode by default
+    setWrapperSize('desktop');
+    
+    if (activeProject.includes('litcal')) {
+      // LitCal triggers the simulator instead of iframe
+      litcalSim.style.display = 'flex';
+      iframeWrapper.style.display = 'none';
+      loader.style.display = 'none';
+      errorOverlay.style.display = 'none';
+      rotateBtn.style.display = 'none';
+      document.querySelectorAll('#demoControls button[data-size]').forEach(b => {
+        b.style.display = b.getAttribute('data-size') === 'mobile' ? 'block' : 'none';
+      });
+      setWrapperSize('mobile');
+    } else {
+      // Web apps use the iframe loader
+      litcalSim.style.display = 'none';
+      iframeWrapper.style.display = 'block';
+      loader.style.display = 'flex';
+      errorOverlay.style.display = 'none';
+      
+      // Allow sizes controls
+      document.querySelectorAll('#demoControls button[data-size]').forEach(b => {
+        b.style.display = 'block';
+      });
+
+      iframe.src = url;
+      
+      // Simple timeout check for loading states
+      let loaded = false;
+      iframe.onload = () => {
+        loaded = true;
+        loader.style.display = 'none';
+      };
+      
+      setTimeout(() => {
+        if (!loaded) {
+          loader.style.display = 'none';
+          // Check if iframe was blocked (could be CORS/X-Frame-Options)
+          if (url.includes('terranostramenu') || url.includes('gajajada') || url.includes('grupofacul')) {
+            // These sites allow previews, hide loader
+            loader.style.display = 'none';
+          } else {
+            errorLink.href = url;
+            errorOverlay.style.display = 'flex';
+          }
+        }
+      }, 5000);
+    }
+  }
+
+  function closeDemo() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    iframe.src = 'about:blank';
+    
+    // Reset Simulator state
+    simResults.style.display = 'none';
+    simLoading.style.display = 'none';
+    simMainView.style.display = 'block';
+  }
+
+  closeBtn.addEventListener('click', closeDemo);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeDemo();
+  });
+
+  openNewBtn.addEventListener('click', () => {
+    if (currentUrl) window.open(currentUrl, '_blank');
+  });
+
+  // Simulator interactions
+  document.querySelectorAll('.sim-preset-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const mealKey = card.getAttribute('data-meal');
+      const meal = presets[mealKey];
+      
+      simMainView.style.display = 'none';
+      simLoading.style.display = 'flex';
+      
+      setTimeout(() => {
+        simLoading.style.display = 'none';
+        simResults.style.display = 'block';
+        
+        document.getElementById('simResultIcon').textContent = meal.icon;
+        document.getElementById('simResultName').textContent = meal.name;
+        document.getElementById('simResultCals').textContent = meal.cals;
+        document.getElementById('simProtein').textContent = meal.p;
+        document.getElementById('simCarbs').textContent = meal.c;
+        document.getElementById('simFat').textContent = meal.f;
+        document.getElementById('simBreakdown').textContent = meal.text;
+      }, 1500);
+    });
+  });
+
+  simReset.addEventListener('click', () => {
+    simResults.style.display = 'none';
+    simMainView.style.display = 'block';
+  });
+
+  simUpload.addEventListener('click', () => {
+    // Pick random preset for upload simulation
+    const keys = Object.keys(presets);
+    const randomKey = keys[Math.floor(Math.random() * keys.length)];
+    const card = document.querySelector(`.sim-preset-card[data-meal="${randomKey}"]`);
+    if (card) card.click();
+  });
+
+  // Size switcher controls
+  document.querySelectorAll('#demoControls button[data-size]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#demoControls button[data-size]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      setWrapperSize(btn.getAttribute('data-size'));
+    });
+  });
+
+  function setWrapperSize(size) {
+    iframeWrapper.className = `demo-iframe-wrapper ${size}`;
+    if (size === 'desktop') {
+      rotateBtn.style.display = 'none';
+      modalWindow.style.width = '95%';
+      modalWindow.style.height = '90vh';
+    } else {
+      rotateBtn.style.display = 'inline-block';
+      if (size === 'tablet') {
+        modalWindow.style.width = '840px';
+      } else {
+        modalWindow.style.width = '440px';
+      }
+    }
+  }
+
+  rotateBtn.addEventListener('click', () => {
+    iframeWrapper.classList.toggle('landscape');
+  });
+});
+</script>
 </body>
 </html>
