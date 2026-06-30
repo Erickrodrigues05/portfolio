@@ -881,7 +881,7 @@
       activeUrl = url;
       addressBar.textContent = url;
       
-      iframeWrapper.innerHTML = <iframe src="\" class="preview-iframe" title="\" loading="lazy"></iframe>;
+      iframeWrapper.innerHTML = '<iframe src="' + url + '" class="preview-iframe" title="' + title + '" loading="lazy"></iframe>';
       setPreviewMode(mode);
       
       modal.classList.add('active');
