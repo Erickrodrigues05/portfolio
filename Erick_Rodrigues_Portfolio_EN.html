@@ -483,29 +483,46 @@
     border: none;
   }
   .demo-iframe-wrapper.tablet {
-    width: 768px;
-    height: 1024px;
+    width: min(768px, 100%);
+    height: min(1024px, 100%);
     max-height: 100%;
     border: 12px solid #1e293b;
     border-radius: 28px;
   }
   .demo-iframe-wrapper.tablet.landscape {
-    width: 1024px;
-    height: 768px;
+    width: min(1024px, 100%);
+    height: min(768px, 100%);
     max-width: 100%;
   }
   .demo-iframe-wrapper.mobile {
-    width: 375px;
-    height: 812px;
+    width: min(375px, 100%);
+    height: min(812px, 100%);
     max-height: 100%;
     border: 12px solid #1e293b;
     border-radius: 40px;
     overflow: hidden;
   }
   .demo-iframe-wrapper.mobile.landscape {
-    width: 812px;
-    height: 375px;
+    width: min(812px, 100%);
+    height: min(375px, 100%);
     max-width: 100%;
+  }
+
+  /* Responsive tweaks for demo controls */
+  @media (max-width: 900px) {
+    .demo-controls-center {
+      display: none !important;
+    }
+    .demo-iframe-wrapper.tablet,
+    .demo-iframe-wrapper.mobile {
+      width: 100% !important;
+      height: 100% !important;
+      border: none !important;
+      border-radius: 0 !important;
+    }
+    .demo-iframe-wrapper.mobile::after {
+      display: none !important;
+    }
   }
 
   /* Mock notch for mobile */
@@ -1403,13 +1420,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (size === 'desktop') {
       rotateBtn.style.display = 'none';
       modalWindow.style.width = '95%';
-      modalWindow.style.height = '90vh';
     } else {
       rotateBtn.style.display = 'inline-block';
+      // Responsive layout max constraints
       if (size === 'tablet') {
-        modalWindow.style.width = '840px';
+        modalWindow.style.width = 'min(840px, 95%)';
       } else {
-        modalWindow.style.width = '440px';
+        modalWindow.style.width = 'min(440px, 95%)';
       }
     }
   }
